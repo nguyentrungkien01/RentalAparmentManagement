@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO
+namespace DTO.Request
 {
-    public class CommentDTO
+    public class CommentRequestDTO
     {
         public string Content { get; set; }
         public DateTime? DateCreated { get; set; }
-        public AccountDTO Account { get; set; }
-        public PostDTO Post { get; set; }
+        public int AccountId { get; set; }
+        public int PostId { get; set; }
     }
 }

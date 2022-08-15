@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO
+namespace DTO.Respone
 {
-    public class RoleDTO
+    public class RoleResponeDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<AccountDTO> AccountDTOs { get; set; }
+        public List<AccountResponeDTO> AccountDTOs { get; set; }
     }
 }

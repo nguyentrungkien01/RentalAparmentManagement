@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO
+namespace DTO.Respone
 {
-    public class ImageDTO
+    public class ImageResponeDTO
     {
         public int Id { get; set; }
         public string Path { get; set; }
-
-        public PostDTO Post { get; set; }
+        public int PostId { get; set; }
     }
 }

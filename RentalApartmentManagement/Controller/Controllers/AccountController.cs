@@ -1,5 +1,5 @@
 ﻿using BUS;
-using DTO;
+using DTO.Respone;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,7 +15,7 @@ namespace Controller.Controllers
     {
         private AccountBUS accountBUS = new AccountBUS();
         [HttpGet]
-        public IEnumerable<AccountDTO> getListAccount()
+        public IEnumerable<AccountResponeDTO> getListAccount()
         {
             return accountBUS.getListAccount();
         }

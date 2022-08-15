@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DTO
+namespace DTO.Respone
 {
-    public class OrderDetailDTO
+   public class OrderDetailResponeDTO
     {
         public DateTime? OrderDated { get; set; }
         public int MonthAmount { get; set; }
         public decimal? PriceTotal { get; set; }
-
-        public  AccountDTO Account { get; set; }
-        public  PostDTO Post { get; set; }
+        public AccountResponeDTO Account { get; set; }
+        public PostResponeDTO Post { get; set; }
     }
 }

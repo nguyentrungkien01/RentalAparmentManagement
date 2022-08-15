@@ -1,5 +1,5 @@
 ﻿using DAL.Entity;
-using DTO;
+using DTO.Respone;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,19 +10,19 @@ namespace BUS
 {
     public class AccountBUS
     {
-        public List<AccountDTO> getListAccount()
+        public List<AccountResponeDTO> getListAccount()
         {
             using(var context = new RentalApartmentManagementContext())
             {
                 var accounts = context.Account.Include(acc => acc.Role).ToList();
-                List<AccountDTO> accountDTOs = new List<AccountDTO>();
+                List<AccountResponeDTO> accountDTOs = new List<AccountResponeDTO>();
                 foreach (var a in accounts)
                 {
-                    AccountDTO aDTO = new AccountDTO();
+                    AccountResponeDTO aDTO = new AccountResponeDTO();
                     aDTO.Id = a.Id;
                     aDTO.FirstName = a.FirstName;
                     aDTO.LastName = a.LastName;
-                    RoleDTO roleDTO = new RoleDTO();
+                    RoleResponeDTO roleDTO = new RoleResponeDTO();
                     roleDTO.Id = a.Role.Id;
                     roleDTO.Name = a.Role.Name;
                     aDTO.Role = roleDTO;
