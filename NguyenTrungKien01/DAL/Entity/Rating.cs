@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+
+// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
+// If you have enabled NRTs for your project, then un-comment the following line:
+// #nullable disable
 
 namespace DAL.Entity
 {
-    public class Rating
+    public partial class Rating
     {
-        int accountId { get; set; }
-        int postId { get; set; }
-        int rateAmount { get; set; }
+        public int AccountId { get; set; }
+        public int PostId { get; set; }
+        public int RateAmount { get; set; }
+
+        public virtual Account Account { get; set; }
+        public virtual Post Post { get; set; }
     }
 }
