@@ -19,17 +19,17 @@ namespace Controller.Controllers
     public class SignInController : ControllerBase
     {
         private readonly IConfiguration _cofiguration;
-        private readonly IBaseService<BaseRequest, BaseResponse> _signInService;
+        private readonly IBaseService<IBaseRequest, IBaseResponse> _signInService;
         public SignInController()
         {
             _signInService = new SignInService();
         }
 
         [AllowAnonymous]
-        [HttpGet]
-        public BaseResponse SignIn()
+        [HttpPost]
+        public IBaseResponse SignIn([FromBody] SignInRequestDTO signInRequestDTO)
         {
-            return _signInService.excute(new BaseRequest());
+            return _signInService.excute(signInRequestDTO);
         }
     }
 }

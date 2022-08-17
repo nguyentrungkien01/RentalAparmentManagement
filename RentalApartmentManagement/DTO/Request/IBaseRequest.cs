@@ -4,8 +4,7 @@ using System.Text;
 
 namespace DTO.Request
 {
-    public class BaseRequest
+    public interface IBaseRequest
     {
-        public object Data { get; set; }
     }
 }
