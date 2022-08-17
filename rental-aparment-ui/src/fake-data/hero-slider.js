@@ -1,6 +1,6 @@
-const img1 = require('../assets/images/slider/slide_1.jpg');
-const img2 = require('../assets/images/slider/slide_2.jpg');
-const img3 = require('../assets/images/slider/slide_3.jpg');
+const img1 = require('../assets/images/slider/slide_1.png');
+const img2 = require('../assets/images/slider/slide_2.png');
+const img3 = require('../assets/images/slider/slide_3.png');
 
 const heroSliderData = [
     {
