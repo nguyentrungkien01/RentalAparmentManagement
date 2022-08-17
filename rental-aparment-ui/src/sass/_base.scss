@@ -10,10 +10,10 @@
 }
 
 html {
-    font-size: 16px;
+    font-size: 13px;
 
     @include mobile {
-        font-size: 14px;
+        font-size: 11px;
     }
 }
 
@@ -30,7 +30,15 @@ a {
     color: unset;
 }
 
-@each $color, $val in $color {
+a:hover {
+    color: $main-color;
+}
+
+img {
+    max-width: 100%;
+}
+
+@each $color, $val in $colors {
     .color-#{$color} {
         color: $val;
     }
@@ -89,4 +97,8 @@ a {
     @include mobile {
         margin-top: calc(#{$header-mobile-height} + 10px);
     }
+}
+
+.grid {
+    display: grid;
 }

@@ -5,24 +5,25 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import { publicRoutes } from '../routes/routes';
+
 const Layout = () => {
     return (
-        <>
-            <div className="container">
+        <BrowserRouter>
+            <>
                 <Header />
-                <div className="main">
-                    <BrowserRouter>
+                <div className="container">
+                    <div className="main">
                         <Routes>
                             {publicRoutes.map((route, index) => {
                                 const Page = route.component;
                                 return <Route key={index} path={route.path} element={<Page />} />;
                             })}
                         </Routes>
-                    </BrowserRouter>
+                    </div>
                 </div>
-            </div>
-            <Footer />
-        </>
+                <Footer />
+            </>
+        </BrowserRouter>
     );
 };
 
