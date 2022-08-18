@@ -1,4 +1,5 @@
 ﻿using DAL;
+using DTO.Request;
 using DTO.Respone;
 using System;
 using System.Collections.Generic;
@@ -7,15 +8,14 @@ using Util.Constant;
 
 namespace BUS
 {
-    public class ApartmentDetailService : BaseService<int, IBaseResponse>
+    public class ApartmentDetailService : BaseService<IBaseRequest, IBaseResponse>
     {
-        private readonly IBaseRepository<int, IBaseResponse> _baseRepository;
         public ApartmentDetailService()
         {
             _baseRepository = new ApartmentDetailRepository();
         }
 
-        protected override IBaseResponse DoExcute(int input)
+        protected override IBaseResponse DoExcute(IBaseRequest input)
         {
             CommonResponse baseResponse = (CommonResponse)_baseRepository.Excute(input);
             if (baseResponse.Data is null)
@@ -31,12 +31,12 @@ namespace BUS
             return baseResponse;
         }
 
-        protected override void PostExcute(int input)
+        protected override void PostExcute(IBaseRequest input)
         {
             //
         }
 
-        protected override void PreExcute(int input)
+        protected override void PreExcute(IBaseRequest input)
         {
             //
         }

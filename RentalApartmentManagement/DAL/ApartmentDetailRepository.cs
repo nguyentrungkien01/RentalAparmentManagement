@@ -1,4 +1,5 @@
 ﻿using DAL.Entity;
+using DTO.Request;
 using DTO.Respone;
 using System;
 using System.Collections.Generic;
@@ -7,28 +8,22 @@ using System.Text;
 
 namespace DAL
 {
-    public class ApartmentDetailRepository : BaseRepository<int, IBaseResponse>
+    public class ApartmentDetailRepository : BaseRepository<IBaseRequest, IBaseResponse>
     {
-        private readonly RentalApartmentManagementContext _dtContext;
-
-        public ApartmentDetailRepository()
+        protected override IBaseResponse DoExcute(IBaseRequest input)
         {
-            _dtContext = new RentalApartmentManagementContext();
-        }
-
-        protected override IBaseResponse DoExcute(int input)
-        {
+            var req = (ApartmentDetailRequestDTO)input;
             CommonResponse baseResponse = new CommonResponse();
             Post post = new Post();
-            post = _dtContext.Post.FirstOrDefault(s => s.Id == input);
+            post = _dtContext.Post.FirstOrDefault(s => s.Id == req.Id);
             if(post != null)
             {
                 post.Image = (from image in _dtContext.Image
-                              where image.PostId == input
+                              where image.PostId == req.Id
                               select image).ToList();
                 List<Comment> comments = (
                                 from comment in _dtContext.Comment
-                                where comment.PostId == input
+                                where comment.PostId == req.Id
                                 select comment).ToList();
                 comments.ForEach(s =>
                     s.Account = (from acc in _dtContext.Account
@@ -37,7 +32,7 @@ namespace DAL
                 );
                 post.Comment = comments;
                 List<Rating> rating = (from r in _dtContext.Rating
-                                       where r.PostId == input
+                                       where r.PostId == req.Id
                                        select r).ToList();
                 rating.ForEach(s =>
                     s.Account = (from acc in _dtContext.Account
@@ -53,12 +48,12 @@ namespace DAL
         }
 
 
-        protected override void PostExcute(int input)
+        protected override void PostExcute(IBaseRequest input)
         {
             //
         }
 
-        protected override void PreExcute(int input)
+        protected override void PreExcute(IBaseRequest input)
         {
             //
         }
