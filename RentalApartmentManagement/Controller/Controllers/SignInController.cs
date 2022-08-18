@@ -20,7 +20,7 @@ namespace Controller.Controllers
         [AllowAnonymous]
         public IBaseResponse SignIn([FromBody] SignInRequestDTO signInRequestDTO)
         {
-            return _baseService.excute(signInRequestDTO);
+            return _baseService.Excute(signInRequestDTO);
         }
     }
 }

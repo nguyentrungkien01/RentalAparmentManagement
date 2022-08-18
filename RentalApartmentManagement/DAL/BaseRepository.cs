@@ -9,12 +9,12 @@ namespace DAL
     {
         protected readonly RentalApartmentManagementContext _dtContext = 
             new RentalApartmentManagementContext();
-        public O excute(I input)
+        public O Excute(I input)
         {
             try
             {
-                preExcute(input);
-                return doExcute(input);
+                PreExcute(input);
+                return DoExcute(input);
             }
             catch (Exception e)
             {
@@ -22,14 +22,14 @@ namespace DAL
             }
             finally
             {
-                postExcute(input);
+                PostExcute(input);
             }
         }
 
-        protected abstract void preExcute(I input);
+        protected abstract void PreExcute(I input);
 
-        protected abstract O doExcute(I input);
+        protected abstract O DoExcute(I input);
 
-        protected abstract void postExcute(I input);
+        protected abstract void PostExcute(I input);
     }
 }

@@ -7,7 +7,7 @@ namespace DAL
 {
     public class SignInRepository : BaseRepository<IBaseRequest, IBaseResponse>
     {
-        protected override IBaseResponse doExcute(IBaseRequest input)
+        protected override IBaseResponse DoExcute(IBaseRequest input)
         {
             var signInRequestDTO = (SignInRequestDTO)input;
             var baseResponse = new CommonResponse();
@@ -16,7 +16,8 @@ namespace DAL
                           join role in _dtContext.Role
                           on account.RoleId equals role.Id
                           where account.PhoneNumber.Equals(signInRequestDTO.PhoneNumber) &&
-                          account.Password.Equals(signInRequestDTO.Password)
+                          account.Password.Equals(signInRequestDTO.Password) &&
+                          account.Status.Equals(1)
                           select new
                           {
                               account.FirstName,
@@ -40,12 +41,12 @@ namespace DAL
             return baseResponse;
         }
 
-        protected override void postExcute(IBaseRequest input)
+        protected override void PostExcute(IBaseRequest input)
         {
             // close connection to database
         }
 
-        protected override void preExcute(IBaseRequest input)
+        protected override void PreExcute(IBaseRequest input)
         {
             //  open connection to database
         }
