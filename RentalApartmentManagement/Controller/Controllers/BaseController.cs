@@ -9,6 +9,7 @@ namespace Controller.Controllers
 {
     [ApiController]
     [EnableCors("CorsApi")]
+    [Route("api/[controller]")]
     public abstract class BaseController : ControllerBase
     {
 

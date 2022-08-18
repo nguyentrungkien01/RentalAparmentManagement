@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Controller.Controllers
 {
-    [Route("api/[controller]")]
+
     public class SignInController : BaseController
     {
         private readonly IBaseService<IBaseRequest, IBaseResponse> _signInService;

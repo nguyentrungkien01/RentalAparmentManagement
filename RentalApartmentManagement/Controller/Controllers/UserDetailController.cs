@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Controller.Controllers
 {
-    [Route("api/[controller]")]
     public class UserDetailController : BaseController
     {
 
