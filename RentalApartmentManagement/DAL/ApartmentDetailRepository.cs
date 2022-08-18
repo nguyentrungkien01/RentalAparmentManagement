@@ -16,7 +16,7 @@ namespace DAL
             _dtContext = new RentalApartmentManagementContext();
         }
 
-        protected override IBaseResponse doExcute(int input)
+        protected override IBaseResponse DoExcute(int input)
         {
             CommonResponse baseResponse = new CommonResponse();
             Post post = new Post();
@@ -53,12 +53,12 @@ namespace DAL
         }
 
 
-        protected override void postExcute(int input)
+        protected override void PostExcute(int input)
         {
             //
         }
 
-        protected override void preExcute(int input)
+        protected override void PreExcute(int input)
         {
             //
         }

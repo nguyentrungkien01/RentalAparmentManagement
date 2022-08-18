@@ -15,9 +15,9 @@ namespace BUS
             _baseRepository = new ApartmentDetailRepository();
         }
 
-        protected override IBaseResponse doExcute(int input)
+        protected override IBaseResponse DoExcute(int input)
         {
-            CommonResponse baseResponse = (CommonResponse)_baseRepository.excute(input);
+            CommonResponse baseResponse = (CommonResponse)_baseRepository.Excute(input);
             if (baseResponse.Data is null)
             {
                 baseResponse.Message = Message.NOT_FOUND;
@@ -31,12 +31,12 @@ namespace BUS
             return baseResponse;
         }
 
-        protected override void postExcute(int input)
+        protected override void PostExcute(int input)
         {
             //
         }
 
-        protected override void preExcute(int input)
+        protected override void PreExcute(int input)
         {
             //
         }
