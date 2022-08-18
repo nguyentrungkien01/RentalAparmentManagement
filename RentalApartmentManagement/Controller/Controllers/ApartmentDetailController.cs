@@ -22,10 +22,8 @@ namespace Controller.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IBaseResponse SignIn([FromQuery] int id)
+        public IBaseResponse SignIn([FromQuery] ApartmentDetailRequestDTO apm)
         {
-            ApartmentDetailRequestDTO apm = new ApartmentDetailRequestDTO();
-            apm.Id = id;
             return _baseService.Excute(apm);
         }
     }
