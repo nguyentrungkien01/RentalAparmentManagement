@@ -22,11 +22,11 @@ namespace BUS
             this._configuration = configuration;
         }
 
-        protected override void preExcute(IBaseRequest input)
+        protected override void PreExcute(IBaseRequest input)
         {
             // do nothing 
         }
-        protected override IBaseResponse doExcute(IBaseRequest input)
+        protected override IBaseResponse DoExcute(IBaseRequest input)
         {
             var validInput = (SignInRequestDTO)input;
             if (validInput is null || 
@@ -40,7 +40,7 @@ namespace BUS
                 };
             }
 
-            var baseResponse = (CommonResponse)_baseRepository.excute(input);
+            var baseResponse = (CommonResponse)_baseRepository.Excute(input);
             var signInResponseDTO = new SignInResponseDTO(baseResponse);
             if (baseResponse.Data is null)
             {
@@ -72,7 +72,7 @@ namespace BUS
             return signInResponseDTO;
         }
 
-        protected override void postExcute(IBaseRequest input)
+        protected override void PostExcute(IBaseRequest input)
         {
             //do nothing
         }

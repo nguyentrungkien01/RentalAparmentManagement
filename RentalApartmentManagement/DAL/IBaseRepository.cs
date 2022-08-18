@@ -6,6 +6,6 @@ namespace DAL
 {
     public interface IBaseRepository<I, O>
     {
-         public O excute(I input);
+         public O Excute(I input);
     }
 }
