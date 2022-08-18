@@ -10,24 +10,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 namespace Controller.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    [EnableCors("CorsApi")]                                                 
-    public class ApartmentDetailController : ControllerBase
-    {
-        private readonly IBaseService<int, IBaseResponse> _detailService;           
+{                                         
+    public class ApartmentDetailController : BaseController
+    {       
         public ApartmentDetailController()
         {
-            _detailService = new ApartmentDetailService();
+            _baseService = new ApartmentDetailService();
         }
 
         [AllowAnonymous]
         [HttpGet]
         public IBaseResponse SignIn([FromQuery] int id)
         {
-            return _detailService.Excute(id);
+            ApartmentDetailRequestDTO apm = new ApartmentDetailRequestDTO();
+            apm.Id = id;
+            return _baseService.Excute(apm);
         }
     }
 }
