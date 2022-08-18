@@ -22,7 +22,7 @@ namespace Controller.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IBaseResponse SignIn([FromQuery] ApartmentDetailRequestDTO apm)
+        public IBaseResponse Detail([FromQuery] ApartmentDetailRequestDTO apm)
         {
             return _baseService.Excute(apm);
         }
