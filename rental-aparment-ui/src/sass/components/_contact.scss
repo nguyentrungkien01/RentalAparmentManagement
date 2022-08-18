@@ -1,0 +1,135 @@
+.contact-bg {
+    @include flex(center, center);
+    flex-direction: column;
+    height: 40vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url(../../assets/images/contact/contact-bg.jpg);
+    background-position: 50% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align: center;
+    color: $txt-white;
+    border-radius: 7px;
+
+    h3 {
+        font-size: 1.3rem;
+        font-weight: 400;
+    }
+
+    h2 {
+        font-size: 3rem;
+        text-transform: uppercase;
+        padding: 0.4rem 0;
+        letter-spacing: 4px;
+    }
+
+    &__line {
+        display: flex;
+        align-items: center;
+
+        div {
+            margin: 0 0.2rem;
+
+            &:nth-child(2) {
+                width: 10px;
+                height: 10px;
+                background: $contact-color;
+                border-radius: 50%;
+            }
+            &:nth-child(1),
+            &:nth-child(3) {
+                height: 3px;
+                width: 70px;
+                background: $contact-color;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    &__text {
+        font-weight: 300;
+        opacity: 0.9;
+        margin: 1.6rem 0;
+    }
+
+    @include tablet {
+        &__text {
+            width: 80%;
+        }
+    }
+}
+
+.contact-info {
+    text-align: center;
+
+    span {
+        display: block;
+
+        i {
+            font-size: 2rem;
+            padding-bottom: 0.9rem;
+            color: $contact-color;
+        }
+    }
+
+    div {
+        margin: 0.8rem 0;
+        padding: 1rem;
+
+        span:nth-child(2) {
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+    }
+
+    &__text {
+        padding-top: 0.4rem;
+    }
+}
+
+.contact-form {
+    padding: 2rem 0;
+    border-top: 1px solid $border-color;
+
+    .grid {
+        align-items: center;
+    }
+
+    > div {
+        margin: 0 auto;
+        text-align: center;
+
+        img {
+            width: 85%;
+        }
+    }
+
+    .form-control {
+        width: 100%;
+        border: 1.5px solid $border-color;
+        border-radius: 5px;
+        padding: 0.7rem;
+        margin: 0.6rem 0;
+        font-size: 1rem;
+        outline: 0;
+
+        &:focus {
+            box-shadow: $box-shadow;
+        }
+    }
+
+    .send-btn {
+        font-size: 1rem;
+        text-transform: uppercase;
+        color: $txt-white;
+        background: $contact-color;
+        border: none;
+        border-radius: 5px;
+        padding: 0.7rem 1.5rem;
+        cursor: pointer;
+        transition: all 0.4s ease;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}

@@ -1,7 +1,7 @@
 const policy = [
     {
         name: "Đặt phòng",
-        description: "Hướng dẫn cách đặt phòng",
+        description: "Hướng dẫn đặt phòng",
         icon: "bx bx-home-heart"
     },
     {
@@ -11,12 +11,12 @@ const policy = [
     },
     {
         name: "Ngân hàng",
-        description: "Thanh toán qua các ngân hàng",
+        description: "Thanh toán qua ngân hàng",
         icon: "bx bxs-bank"
     },
     {
         name: "Hỗ trợ nhanh",
-        description: "Liên hệ nhanh chóng, tiện lợi",
+        description: "Nhanh chóng, tiện lợi",
         icon: "bx bx-donate-heart"
     }
 ]

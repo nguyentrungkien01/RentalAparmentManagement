@@ -1,40 +1,52 @@
 ﻿using DAL.Entity;
 using DTO.Request;
 using DTO.Respone;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 namespace DAL
 {
     public class SignInRepository : BaseRepository<IBaseRequest, IBaseResponse>
     {
-        private readonly RentalApartmentManagementContext _dtContext;
-
-        public SignInRepository()
+        protected override IBaseResponse DoExcute(IBaseRequest input)
         {
-            _dtContext = new RentalApartmentManagementContext();
-        }
+            var signInRequestDTO = (SignInRequestDTO)input;
+            var baseResponse = new CommonResponse();
 
+            var result = (from account in _dtContext.Account
+                          join role in _dtContext.Role
+                          on account.RoleId equals role.Id
+                          where account.PhoneNumber.Equals(signInRequestDTO.PhoneNumber) &&
+                          account.Password.Equals(signInRequestDTO.Password) &&
+                          account.Status.Equals(1)
+                          select new
+                          {
+                              account.FirstName,
+                              account.LastName,
+                              account.PhoneNumber,
+                              Role = role.Name
+                          }).ToList();
 
-        protected override IBaseResponse doExcute(IBaseRequest input)
-        {
-            SignInRequestDTO signInRequestDTO = (SignInRequestDTO)input;
-            CommonResponse baseResponse = new CommonResponse();
-            baseResponse.Data = _dtContext.Account.FirstOrDefault(
-                account =>
-                account.PhoneNumber.Equals(signInRequestDTO.PhoneNumber) &&
-                account.Password.Equals(signInRequestDTO.Password)
-                );
+            if (result.Count >= 1)
+            {
+                baseResponse.Data = new Dictionary<string, string>
+                {
+                    { "FirstName", result[0].FirstName },
+                    { "LastName", result[0].LastName },
+                    { "PhoneNumber", result[0].PhoneNumber},
+                    { "Role", result[0].Role}
+
+                };
+            }
+
             return baseResponse;
         }
 
-        protected override void postExcute(IBaseRequest input)
+        protected override void PostExcute(IBaseRequest input)
         {
             // close connection to database
         }
 
-        protected override void preExcute(IBaseRequest input)
+        protected override void PreExcute(IBaseRequest input)
         {
             //  open connection to database
         }
