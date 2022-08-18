@@ -27,7 +27,7 @@ namespace Controller.Controllers
         [HttpGet]
         public IBaseResponse SignIn([FromQuery] int id)
         {
-            return _detailService.excute(id);
+            return _detailService.Excute(id);
         }
     }
 }
