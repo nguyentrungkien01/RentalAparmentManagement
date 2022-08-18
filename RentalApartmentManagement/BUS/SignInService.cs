@@ -29,9 +29,21 @@ namespace BUS
         }
         protected override IBaseResponse doExcute(IBaseRequest input)
         {
+            var validInput = (SignInRequestDTO)input;
+            if (validInput is null || 
+                String.IsNullOrEmpty(validInput.PhoneNumber) ||
+                String.IsNullOrEmpty(validInput.Password))
+            {
+                return new CommonResponse
+                {
+                    Message = Message.NOT_FOUND,
+                    Code = Code.NOT_FOUND
+                };
+            }
+
             var baseResponse = (CommonResponse)_baseRepository.excute(input);
             var signInResponseDTO = new SignInResponseDTO(baseResponse);
-            if (signInResponseDTO.Data is null)
+            if (baseResponse.Data is null)
             {
                 signInResponseDTO.Message = Message.NOT_FOUND;
                 signInResponseDTO.Code = Code.NOT_FOUND;
@@ -65,7 +77,6 @@ namespace BUS
         {
             //do nothing
         }
-
     }
 
 }
