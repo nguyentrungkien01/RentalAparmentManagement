@@ -19,28 +19,30 @@ namespace DAL
             var baseResponse = new CommonResponse();
 
             var result = (from account in _dtContext.Account
-                                join role in _dtContext.Role
-                                on account.RoleId equals role.Id
-                                where account.PhoneNumber.Equals(signInRequestDTO.PhoneNumber) &&
-                                account.Password.Equals(signInRequestDTO.Password)
-                                select new
-                                {
-                                    account.FirstName,
-                                    account.LastName,
-                                    account.PhoneNumber,
-                                    Role = role.Name
-                                }).ToList();
+                          join role in _dtContext.Role
+                          on account.RoleId equals role.Id
+                          where account.PhoneNumber.Equals(signInRequestDTO.PhoneNumber) &&
+                          account.Password.Equals(signInRequestDTO.Password)
+                          select new
+                          {
+                              account.FirstName,
+                              account.LastName,
+                              account.PhoneNumber,
+                              Role = role.Name
+                          }).ToList();
 
             if (result.Count >= 1)
             {
-                IDictionary<string, string> dict = new Dictionary<string, string>();
-                dict.Add("FirstName", result[0].FirstName);
-                dict.Add("LastName", result[0].LastName);
-                dict.Add("PhoneNumber", result[0].PhoneNumber);
-                dict.Add("Role", result[0].Role);
-                baseResponse.Data = dict;
+                baseResponse.Data = new Dictionary<string, string>
+                {
+                    { "FirstName", result[0].FirstName },
+                    { "LastName", result[0].LastName },
+                    { "PhoneNumber", result[0].PhoneNumber},
+                    { "Role", result[0].Role}
+
+                };
             }
-             
+
             return baseResponse;
         }
 
