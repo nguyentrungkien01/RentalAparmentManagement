@@ -14,22 +14,22 @@ namespace DAL
             var userDetailRequestDTO = (UserDetailRequestDTO)input;
             var baseResponse = new CommonResponse();
             var result = from account in _dtContext.Account
-                          join role in _dtContext.Role
-                          on account.RoleId equals role.Id
-                          where account.PhoneNumber.Equals(userDetailRequestDTO.PhoneNumber) &&
-                          account.Status.Equals(1)
-                          select new
-                          {
-                              account.FirstName,
-                              account.LastName,
-                              account.Gender,
-                              account.Address,
-                              account.IdCard,
-                              account.PhoneNumber,
-                              account.DateCreated,
-                              account.Email,
-                              Role = role.Name
-                          };
+                         join role in _dtContext.Role
+                         on account.RoleId equals role.Id
+                         where account.PhoneNumber.Equals(userDetailRequestDTO.PhoneNumber) &&
+                         account.Status.Equals(1)
+                         select new
+                         {
+                             account.FirstName,
+                             account.LastName,
+                             account.Gender,
+                             account.Address,
+                             account.IdCard,
+                             account.PhoneNumber,
+                             account.DateCreated,
+                             account.Email,
+                             Role = role.Name
+                         };
             baseResponse.Data = result;
             return baseResponse;
         }
