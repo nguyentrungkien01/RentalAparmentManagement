@@ -15,7 +15,6 @@ namespace BUS
 {
     public class SignInService : BaseService<IBaseRequest, IBaseResponse>
     {
-        private readonly IBaseRepository<IBaseRequest, IBaseResponse> _baseRepository;
         private readonly IConfiguration _configuration;
         public SignInService(IConfiguration configuration)
         {

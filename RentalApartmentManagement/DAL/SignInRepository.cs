@@ -7,12 +7,6 @@ namespace DAL
 {
     public class SignInRepository : BaseRepository<IBaseRequest, IBaseResponse>
     {
-        private readonly RentalApartmentManagementContext _dtContext;
-
-        public SignInRepository()
-        {
-            _dtContext = new RentalApartmentManagementContext();
-        }
         protected override IBaseResponse doExcute(IBaseRequest input)
         {
             var signInRequestDTO = (SignInRequestDTO)input;

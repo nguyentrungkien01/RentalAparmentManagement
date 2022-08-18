@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DAL;
+using DTO.Request;
+using DTO.Respone;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +9,7 @@ namespace BUS
 {
     public abstract class BaseService<I, O> : IBaseService<I, O>
     {
+        protected IBaseRepository<I, O> _baseRepository;
         public O excute(I input)
         {
             try

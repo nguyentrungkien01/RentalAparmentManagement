@@ -9,9 +9,7 @@ using Microsoft.Extensions.Configuration;
 namespace Controller.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    [EnableCors("CorsApi")]
-    public class SignInController : ControllerBase
+    public class SignInController : BaseController
     {
         private readonly IBaseService<IBaseRequest, IBaseResponse> _signInService;
         public SignInController(IConfiguration configuration)
