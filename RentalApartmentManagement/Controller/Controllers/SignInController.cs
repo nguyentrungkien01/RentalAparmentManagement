@@ -11,17 +11,16 @@ namespace Controller.Controllers
 
     public class SignInController : BaseController
     {
-        private readonly IBaseService<IBaseRequest, IBaseResponse> _signInService;
         public SignInController(IConfiguration configuration)
         {
-            _signInService = new SignInService(configuration);
+            _baseService = new SignInService(configuration);
         }
 
         [HttpPost]
         [AllowAnonymous]
         public IBaseResponse SignIn([FromBody] SignInRequestDTO signInRequestDTO)
         {
-            return _signInService.excute(signInRequestDTO);
+            return _baseService.excute(signInRequestDTO);
         }
     }
 }
