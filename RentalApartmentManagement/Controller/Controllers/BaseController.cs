@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using BUS;
+using DTO.Request;
+using DTO.Respone;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +15,6 @@ namespace Controller.Controllers
     [Route("api/[controller]")]
     public abstract class BaseController : ControllerBase
     {
-
+        protected IBaseService<IBaseRequest, IBaseResponse> _baseService;
     }
 }
