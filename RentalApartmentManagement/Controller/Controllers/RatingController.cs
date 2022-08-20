@@ -20,7 +20,7 @@ namespace Controller.Controllers
             _baseService = new RatingService();
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "user")]
         [HttpPost]
         public IBaseResponse Rating([FromBody] RatingRequest res)
         {

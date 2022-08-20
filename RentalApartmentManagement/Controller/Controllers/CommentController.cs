@@ -20,7 +20,7 @@ namespace Controller.Controllers
             _baseService = new CommentService();
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "user")]
         [HttpPost]
         public IBaseResponse Comment([FromBody] CommentRequestDTO comment)
         {

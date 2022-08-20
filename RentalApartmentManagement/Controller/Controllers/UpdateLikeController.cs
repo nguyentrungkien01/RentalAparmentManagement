@@ -21,7 +21,7 @@ namespace Controller.Controllers
             _baseService = new UpdateLikeService();
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "user")]
         [HttpPost]
         public IBaseResponse UpdateLike([FromQuery] LikeRequest res)
         {
