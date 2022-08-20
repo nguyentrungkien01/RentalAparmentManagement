@@ -8,5 +8,6 @@ namespace Util.Constant
     {
         OK = 200,
         NOT_FOUND = 401,
+        INVALID = 402
     }
 }
