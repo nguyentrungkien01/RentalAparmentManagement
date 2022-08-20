@@ -31,7 +31,8 @@ namespace DAL.Entity
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-7VAHJN0\\NGUYENTRUNGKIEN;Database=RentalApartmentManagement;Trusted_Connection=True;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=RentalApartmentManagement;Integrated Security=True");
             }
         }
 
@@ -118,12 +119,9 @@ namespace DAL.Entity
 
             modelBuilder.Entity<Comment>(entity =>
             {
-                entity.HasKey(e => new { e.AccountId, e.PostId })
-                    .HasName("PK__Comment__4FB7E22791CC95E5");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.AccountId).HasColumnName("accountId");
-
-                entity.Property(e => e.PostId).HasColumnName("postId");
 
                 entity.Property(e => e.Content)
                     .IsRequired()
@@ -135,16 +133,16 @@ namespace DAL.Entity
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.PostId).HasColumnName("postId");
+
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.Comment)
                     .HasForeignKey(d => d.AccountId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Comment_Account");
 
                 entity.HasOne(d => d.Post)
                     .WithMany(p => p.Comment)
                     .HasForeignKey(d => d.PostId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Comment_Post");
             });
 
