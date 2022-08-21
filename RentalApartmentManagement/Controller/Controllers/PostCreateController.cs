@@ -22,7 +22,7 @@ namespace Controller.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles="user")]
+        [Authorize(Roles = "user")]
         public IBaseResponse Create([FromForm] PostCreateRequestDTO postCreatRequestDTO, List<IFormFile> files)
         {
             postCreatRequestDTO.formFiles = files;

@@ -1,7 +1,6 @@
 ﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,13 +10,13 @@ namespace Util
 {
     public class CloudinaryUtil
     {
-        private Cloudinary _cloudinary;
-
-        public CloudinaryUtil(IConfiguration _configuration)
+        private readonly Cloudinary _cloudinary;
+        public string CloudName { get; set; }
+        public string ApiKey { get; set; }
+        public string ApiSecret { get; set; }
+        public CloudinaryUtil()
         {
-            _cloudinary = new Cloudinary(new Account(_configuration["CloudinarySettings:CloudName"],
-                                                                           _configuration["CloudinarySettings:ApiKey"],
-                                                                           _configuration["CloudinarySettings:ApiSecret"]));
+            _cloudinary = new Cloudinary(new Account(CloudName,ApiKey,ApiSecret));
             _cloudinary.Api.Secure = true;
         }
         public string UploadToCloudinary(IFormFile file)
