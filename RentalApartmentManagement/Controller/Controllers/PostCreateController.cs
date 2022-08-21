@@ -9,8 +9,6 @@ using Util;
 
 namespace Controller.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class PostCreateController : BaseController
     {
         public PostCreateController()
@@ -19,7 +17,7 @@ namespace Controller.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles="user")]
+        [Authorize(Roles = "user")]
         public IBaseResponse Create([FromForm] PostCreateRequestDTO postCreatRequestDTO, List<IFormFile> files)
         {
             postCreatRequestDTO.formFiles = files;
