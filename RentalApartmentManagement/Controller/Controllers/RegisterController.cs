@@ -19,7 +19,7 @@ namespace Controller.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPost]
         public IBaseResponse Register([FromBody] RegisterRequest req)
         {
             return _baseService.Excute(req);
