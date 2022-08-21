@@ -10,5 +10,6 @@ namespace Util.Constant
         INVALID_REQUEST = 400,
         NOT_FOUND = 401,
         CONFLICT = 402
+        INVALID = 403
     }
 }
