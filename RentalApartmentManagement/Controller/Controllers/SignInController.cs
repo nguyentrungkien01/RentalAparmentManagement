@@ -20,13 +20,5 @@ namespace Controller.Controllers
         {
             return _baseService.Excute(signInRequestDTO);
         }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IBaseResponse Test()
-        {
-            MailUtil.Send("1951052091kien@ou.edu.vn", "Test");
-            return null;
-        }
     }
 }

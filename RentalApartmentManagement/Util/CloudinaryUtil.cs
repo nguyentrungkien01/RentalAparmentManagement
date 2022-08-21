@@ -5,29 +5,24 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Util.Constant;
 
 namespace Util
 {
-    public class UploadImage
+    public class CloudinaryUtil
     {
-        private string cloundName= CloudinaryKey.CLOUD_NAME;
-        private string apiKey = CloudinaryKey.API_KEY;
-        private string apiSecret = CloudinaryKey.API_SECRET;
-        private Account myAccount;
-        private Cloudinary _cloudinary;
-
-        public UploadImage()
+        private readonly Cloudinary _cloudinary;
+        public string CloudName { get; set; }
+        public string ApiKey { get; set; }
+        public string ApiSecret { get; set; }
+        public CloudinaryUtil()
         {
-            myAccount = new Account(cloundName, apiKey, apiSecret);
-            _cloudinary = new Cloudinary(myAccount);
+            _cloudinary = new Cloudinary(new Account(CloudName,ApiKey,ApiSecret));
             _cloudinary.Api.Secure = true;
         }
-
         public string UploadToCloudinary(IFormFile file)
         {
-             try
-            { 
+            try
+            {
                 byte[] bytes;
                 using (var memoryStream = new MemoryStream())
                 {
