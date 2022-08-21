@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Util;
 
 namespace Controller.Controllers
 {
@@ -18,6 +19,14 @@ namespace Controller.Controllers
         public IBaseResponse SignIn([FromBody] SignInRequestDTO signInRequestDTO)
         {
             return _baseService.Excute(signInRequestDTO);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IBaseResponse Test()
+        {
+            MailUtil.Send("1951052091kien@ou.edu.vn", "Test");
+            return null;
         }
     }
 }
