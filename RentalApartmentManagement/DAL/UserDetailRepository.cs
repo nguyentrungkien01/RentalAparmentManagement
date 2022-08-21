@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using DAL.Entity;
 
 namespace DAL
 {
@@ -42,6 +43,11 @@ namespace DAL
         protected override void PreExcute(IBaseRequest input)
         {
             // do nothing
+        }
+
+        public Account FindUserByPhoneNumber(string phoneNumber)
+        {
+           return _dtContext.Account.FirstOrDefault(a => a.PhoneNumber.Equals(phoneNumber));
         }
     }
 }

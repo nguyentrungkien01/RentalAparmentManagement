@@ -9,8 +9,9 @@ namespace DAL.Entity
 {
     public partial class Comment
     {
-        public int AccountId { get; set; }
-        public int PostId { get; set; }
+        public int Id { get; set; }
+        public int? AccountId { get; set; }
+        public int? PostId { get; set; }
         public string Content { get; set; }
         public DateTime? DateCreated { get; set; }
 

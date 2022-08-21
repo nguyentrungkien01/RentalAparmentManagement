@@ -1,5 +1,4 @@
 ﻿using Util.Constant;
-
 namespace DTO.Respone
 {
     public class CommonResponse:IBaseResponse

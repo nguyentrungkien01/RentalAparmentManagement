@@ -35,8 +35,8 @@ namespace BUS
             {
                 return new CommonResponse
                 {
-                    Message = Message.NOT_FOUND,
-                    Code = Code.NOT_FOUND
+                    Message = Message.INVALID_REQUEST,
+                    Code = Code.INVALID_REQUEST
                 };
             }
 
