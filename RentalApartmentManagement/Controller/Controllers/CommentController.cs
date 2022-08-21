@@ -20,8 +20,8 @@ namespace Controller.Controllers
             _baseService = new CommentService();
         }
 
-        [Authorize(Roles = "user")]
         [HttpPost]
+        [Authorize(Roles = "user")]
         public IBaseResponse Comment([FromBody] CommentRequestDTO comment)
         {
             ClaimsIdentity Identity = HttpContext.User.Identity as ClaimsIdentity;

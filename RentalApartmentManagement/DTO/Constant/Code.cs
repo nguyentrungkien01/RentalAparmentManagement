@@ -7,7 +7,9 @@ namespace Util.Constant
     public enum Code
     {
         OK = 200,
+        INVALID_REQUEST = 400,
         NOT_FOUND = 401,
-        INVALID = 402
+        CONFLICT = 402,
+        INVALID = 403
     }
 }

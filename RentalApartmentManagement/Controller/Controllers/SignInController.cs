@@ -11,10 +11,7 @@ namespace Controller.Controllers
 
     public class SignInController : BaseController
     {
-        public SignInController(IConfiguration configuration)
-        {
-            _baseService = new SignInService(configuration);
-        }
+        public SignInController(IConfiguration configuration) => _baseService = new SignInService(configuration);
 
         [HttpPost]
         [AllowAnonymous]
