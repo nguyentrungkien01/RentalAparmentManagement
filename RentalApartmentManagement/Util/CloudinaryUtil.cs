@@ -10,17 +10,18 @@ namespace Util
 {
     public class CloudinaryUtil
     {
-        private readonly Cloudinary _cloudinary;
+        private Cloudinary Cloudinary { get; set; }
         public string CloudName { get; set; }
         public string ApiKey { get; set; }
         public string ApiSecret { get; set; }
-        public CloudinaryUtil()
+        private void init()
         {
-            _cloudinary = new Cloudinary(new Account(CloudName,ApiKey,ApiSecret));
-            _cloudinary.Api.Secure = true;
+            Cloudinary = new Cloudinary(new Account(CloudName, ApiKey, ApiSecret));
+            Cloudinary.Api.Secure = true;
         }
         public string UploadToCloudinary(IFormFile file)
         {
+            init();
             try
             {
                 byte[] bytes;
@@ -39,7 +40,7 @@ namespace Util
                     File = new FileDescription(imagePath),
                     Folder = "RentalApartmenntManagement"
                 };
-                var uploadResult = _cloudinary.Upload(@uploadParams);
+                var uploadResult = Cloudinary.Upload(@uploadParams);
                 return uploadResult.SecureUrl.AbsoluteUri;
             }
             catch (Exception)

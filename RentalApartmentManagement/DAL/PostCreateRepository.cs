@@ -17,7 +17,7 @@ namespace DAL
         private readonly CloudinaryUtil _cloudinaryUtil;
         public PostCreateRepository(IConfiguration configuration)
         {
-           _configuration = configuration;
+            _configuration = configuration;
             _cloudinaryUtil = new CloudinaryUtil();
             _cloudinaryUtil.CloudName = _configuration["Cloudinary:CloudName"];
             _cloudinaryUtil.ApiKey = _configuration["Cloudinarys:ApiKey"];
@@ -73,7 +73,7 @@ namespace DAL
 
         protected override void PostExcute(IBaseRequest input)
         {
-           //
+            //
         }
 
         protected override void PreExcute(IBaseRequest input)
