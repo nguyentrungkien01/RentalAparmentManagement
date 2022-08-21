@@ -20,7 +20,7 @@ namespace Controller.Controllers
 
         [HttpPost]
         [Authorize(Roles ="admin")]
-        public IBaseResponse Create([FromBody] PostCreateRequestDTO userCreateRequestDTO)
+        public IBaseResponse Create([FromBody] UserCreateRequestDTO userCreateRequestDTO)
         {
             _baseService = new UserCreateService(_configuration);
             return _baseService.Excute(userCreateRequestDTO); ;

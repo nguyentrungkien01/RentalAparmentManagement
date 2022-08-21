@@ -1,6 +1,7 @@
 ﻿using DAL;
 using DTO.Request;
 using DTO.Respone;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,9 +10,11 @@ namespace BUS
 {
     public class PostCreateService : BaseService<IBaseRequest, IBaseResponse>
     {
-        public PostCreateService()
+        private readonly IConfiguration _configuration;
+        public PostCreateService(IConfiguration configuration)
         {
-            _baseRepository = new PostCreateRepository();
+            _configuration = configuration;
+            _baseRepository = new PostCreateRepository(_configuration);
         }
 
         protected override IBaseResponse DoExcute(IBaseRequest input)

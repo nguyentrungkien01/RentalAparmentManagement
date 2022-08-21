@@ -2,6 +2,7 @@
 using DTO.Request;
 using DTO.Respone;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,9 +13,14 @@ namespace DAL
 {
     public class PostCreateRepository : BaseRepository<IBaseRequest, IBaseResponse>
     {
+        private readonly IConfiguration _configuration;
+        public PostCreateRepository(IConfiguration configuration)
+        {
+           _configuration = configuration;
+        }
         protected override IBaseResponse DoExcute(IBaseRequest input)
         {
-            UploadImage _uploadImage = new UploadImage();
+            CloudinaryUtil cloudinaryUtil = new CloudinaryUtil(_configuration);
             var req = (PostCreateRequestDTO)input;
             var baseResponse = new CommonResponse();
             using (IDbContextTransaction transaction = _dtContext.Database.BeginTransaction())
@@ -37,7 +43,7 @@ namespace DAL
                     string path = "";
                     foreach (var f in req.formFiles)
                     {
-                        path = _uploadImage.UploadToCloudinary(f);
+                        path = cloudinaryUtil.UploadToCloudinary(f);
                         if (!path.Equals("up load failed"))
                         {
                             Image img = new Image();

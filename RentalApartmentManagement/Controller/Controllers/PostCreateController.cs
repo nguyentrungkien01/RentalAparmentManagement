@@ -4,6 +4,7 @@ using DTO.Respone;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using Util;
 
@@ -13,9 +14,11 @@ namespace Controller.Controllers
     [ApiController]
     public class PostCreateController : BaseController
     {
-        public PostCreateController()
+        private readonly IConfiguration _configuration;
+        public PostCreateController(IConfiguration configuration)
         {
-            _baseService = new PostCreateService();
+            _configuration = configuration;
+            _baseService = new PostCreateService(_configuration);
         }
 
         [HttpPost]
@@ -23,7 +26,7 @@ namespace Controller.Controllers
         public IBaseResponse Create([FromForm] PostCreateRequestDTO postCreatRequestDTO, List<IFormFile> files)
         {
             postCreatRequestDTO.formFiles = files;
-            return _baseService.Excute(postCreatRequestDTO); ;
+            return _baseService.Excute(postCreatRequestDTO);
         }
     }
 }
