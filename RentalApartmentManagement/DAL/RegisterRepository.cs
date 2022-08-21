@@ -25,7 +25,7 @@ namespace DAL
                 acc.IdCard = req.IdCard;
                 acc.Email = req.Email;
                 acc.Password = req.Password;
-                acc.RoleId = 1;
+                acc.RoleId = 2;
                 _dtContext.Account.Add(acc);
                 _dtContext.SaveChanges();
                 return new CommonResponse
