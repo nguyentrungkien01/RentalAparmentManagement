@@ -11,18 +11,11 @@ namespace Controller.Controllers
     [ApiController]
     public class AccountController : BaseController
     {
-        private readonly IConfiguration _configuration;
-
-        public AccountController(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         [HttpPost]
         [Authorize(Roles ="admin")]
         public IBaseResponse Create([FromBody] UserCreateRequestDTO userCreateRequestDTO)
         {
-            _baseService = new UserCreateService(_configuration);
+            _baseService = new UserCreateService();
             return _baseService.Excute(userCreateRequestDTO); ;
         }
 
@@ -30,7 +23,7 @@ namespace Controller.Controllers
         [Authorize(Roles ="admin")]
         public IBaseResponse Read()
         {
-            _baseService = new UserReadService(_configuration);
+            _baseService = new UserReadService();
             UserReadRequestDTO userReadRequestDTO = new UserReadRequestDTO();
             return _baseService.Excute(userReadRequestDTO);
         }
@@ -39,7 +32,7 @@ namespace Controller.Controllers
         [Authorize(Roles ="admin")]
         public IBaseResponse Update([FromBody] UserUpdateRequestDTO userUpdateRequestDTO, [FromRoute] int id)
         {
-            _baseService = new UserUpdateService(_configuration);
+            _baseService = new UserUpdateService();
             userUpdateRequestDTO.Id = id;
             return _baseService.Excute(userUpdateRequestDTO);
         }
@@ -48,7 +41,7 @@ namespace Controller.Controllers
         [Authorize(Roles ="admin")]
         public IBaseResponse Delete([FromRoute] UserDeleteRequestDTO userDeleteRequestDTO)
         {
-            _baseService = new UserDeleteService(_configuration);
+            _baseService = new UserDeleteService();
             return _baseService.Excute(userDeleteRequestDTO);
         }
     }

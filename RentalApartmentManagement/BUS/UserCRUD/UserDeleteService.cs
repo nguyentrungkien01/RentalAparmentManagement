@@ -7,7 +7,7 @@ namespace BUS
 {
     public class UserDeleteService : BaseService<IBaseRequest, IBaseResponse>
     {
-        public UserDeleteService(IConfiguration configuration)
+        public UserDeleteService()
         {
             _baseRepository = new UserDeleteRepository();
         }
