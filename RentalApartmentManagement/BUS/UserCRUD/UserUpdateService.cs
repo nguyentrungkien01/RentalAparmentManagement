@@ -10,7 +10,7 @@ namespace BUS
 {
     public class UserUpdateService : BaseService<IBaseRequest, IBaseResponse>
     {
-        public UserUpdateService(IConfiguration configuration)
+        public UserUpdateService()
         {
             _baseRepository = new UserUpdateRepository();
         }
