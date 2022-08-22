@@ -7,8 +7,6 @@ using Microsoft.Extensions.Configuration;
 
 namespace Controller.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class AccountController : BaseController
     {
         [HttpPost]
