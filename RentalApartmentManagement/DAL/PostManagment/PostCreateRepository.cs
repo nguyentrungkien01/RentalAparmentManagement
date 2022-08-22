@@ -20,7 +20,7 @@ namespace DAL
             _configuration = configuration;
             _cloudinaryUtil = new CloudinaryUtil();
             _cloudinaryUtil.CloudName = _configuration["Cloudinary:CloudName"];
-            _cloudinaryUtil.ApiKey = _configuration["Cloudinarys:ApiKey"];
+            _cloudinaryUtil.ApiKey = _configuration["Cloudinary:ApiKey"];
             _cloudinaryUtil.ApiSecret = _configuration["Cloudinary:ApiSecret"];
         }
         protected override IBaseResponse DoExcute(IBaseRequest input)

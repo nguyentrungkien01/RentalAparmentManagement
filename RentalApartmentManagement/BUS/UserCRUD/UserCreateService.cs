@@ -12,7 +12,7 @@ namespace BUS
 {
     public class UserCreateService : BaseService<IBaseRequest, IBaseResponse>
     {
-        public UserCreateService(IConfiguration configuration)
+        public UserCreateService()
         {
             _baseRepository = new UserCreateRepository();
         }

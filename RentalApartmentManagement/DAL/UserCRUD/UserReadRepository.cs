@@ -8,7 +8,6 @@ namespace DAL
     {
         protected override IBaseResponse DoExcute(IBaseRequest input)
         {
-            var userReadRequestDTO = (UserReadRequestDTO)input;
             var baseResponse = new CommonResponse();
             baseResponse.Data = from account in _dtContext.Account
                                             join role in _dtContext.Role
