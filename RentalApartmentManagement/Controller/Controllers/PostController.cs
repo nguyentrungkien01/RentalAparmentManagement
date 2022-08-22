@@ -9,8 +9,6 @@ using System.Collections.Generic;
 
 namespace Controller.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class PostController : BaseController
     {
         private readonly IConfiguration _configuration;
