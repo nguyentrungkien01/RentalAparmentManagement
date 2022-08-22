@@ -10,8 +10,6 @@ using Util;
 
 namespace Controller.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class PostCreateController : BaseController
     {
         private readonly IConfiguration _configuration;
