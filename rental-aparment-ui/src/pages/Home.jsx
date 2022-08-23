@@ -8,7 +8,7 @@ import Helmet from '../components/Helmet';
 import HeroSlider from '../components/HeroSlider';
 import Section, { SectionTitle, SectionBody } from '../components/Section';
 import PolicyCard from '../components/PolicyCard';
-import ProductCard from '../components/ProductCard';
+import MotelCard from '../components/MotelCard';
 import LocationCard from '../components/LocationCard';
 import Grid from '../components/Grid';
 
@@ -115,11 +115,12 @@ const Home = () => {
                 <SectionBody>
                     <Grid col={4} gap={20} mdCol={2} smCol={1}>
                         {productData.getProducts(8).map((item, index) => (
-                            <ProductCard
+                            <MotelCard
                                 key={index}
                                 img01={item.image01}
                                 img02={item.image02}
                                 name={item.title}
+                                address={item.address}
                                 price={Number(item.price)}
                                 old_price={Number(item.old_price)}
                                 slug={item.slug}
@@ -148,11 +149,12 @@ const Home = () => {
                 <SectionBody>
                     <Grid col={4} gap={20} mdCol={2} smCol={1}>
                         {productData.getProducts(8).map((item, index) => (
-                            <ProductCard
+                            <MotelCard
                                 key={index}
                                 img01={item.image01}
                                 img02={item.image02}
                                 name={item.title}
+                                address={item.address}
                                 price={Number(item.price)}
                                 old_price={Number(item.old_price)}
                                 slug={item.slug}

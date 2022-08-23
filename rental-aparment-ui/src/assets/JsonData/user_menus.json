@@ -1,0 +1,17 @@
+[
+    {
+        "icon": "bx bx-user",
+        "content": "Thông tin cá nhân",
+        "href": "/thong-tin-ca-nhan"
+    },
+    {
+        "icon": "bx bx-cog",
+        "content": "Cài đặt",
+        "href": "/cai-dat"
+    },
+    {
+        "icon": "bx bx-log-out-circle bx-rotate-180",
+        "content": "Đăng xuất",
+        "href": "/"
+    }
+]

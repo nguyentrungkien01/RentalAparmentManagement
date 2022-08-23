@@ -9,14 +9,14 @@ const heroSliderData = [
             'Đặt chỗ ở, cho thuê xe, trải nghiệm và nhiều hơn nữa trên Yolo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi ipsa ex maxime quis excepturi optio corporis delectus nihil. Facere dolorum nemo vero mollitia ut qui nulla, impedit unde voluptatum soluta.',
         img: img1,
         color: 'blue',
-        path: '/dia-diem/ao-thun-dinosaur-01',
+        path: '/nha-tro/nha-tro-01-q1',
     },
     {
         title: 'Chào mừng đến với Yolo 2',
         description:
             'Đặt chỗ ở, cho thuê xe, trải nghiệm và nhiều hơn nữa trên Yolo Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi ipsa ex maxime quis excepturi optio corporis delectus nihil. Facere dolorum nemo vero mollitia ut qui nulla, impedit unde voluptatum soluta.',
         img: img2,
-        path: '/dia-diem/ao-thun-dinosaur-02',
+        path: '/nha-tro/nha-tro-02-q2',
         color: 'pink',
     },
     {
@@ -24,7 +24,7 @@ const heroSliderData = [
         description:
             'Đặt chỗ ở, cho thuê xe, trải nghiệm và nhiều hơn nữa trên Yolo Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi ipsa ex maxime quis excepturi optio corporis delectus nihil. Facere dolorum nemo vero mollitia ut qui nulla, impedit unde voluptatum soluta.',
         img: img3,
-        path: '/dia-diem/ao-thun-dinosaur-03',
+        path: '/nha-tro/nha-tro-03-q3',
         color: 'orange',
     },
 ];

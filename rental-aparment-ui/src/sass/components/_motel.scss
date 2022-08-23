@@ -28,14 +28,14 @@
 
         &__main {
             flex-grow: 1;
-            padding-top: 100%;
+            padding-top: 55%;
             position: relative;
 
             img {
                 position: absolute;
                 top: 0;
                 left: 50%;
-                height: 100%;
+                height: auto;
                 transform: translateX(-50%);
             }
         }
@@ -64,6 +64,11 @@
                 color: $main-color;
                 font-size: 2rem;
                 font-weight: 600;
+            }
+
+            &__address {
+                font-size: 1.3rem;
+                padding: 10px 0;
             }
 
             &__title {
