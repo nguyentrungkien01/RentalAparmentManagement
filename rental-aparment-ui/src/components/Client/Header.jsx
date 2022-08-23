@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import logo from '../../src/assets/images/Logo-2.png';
+import logo from '../../assets/images/Logo-2.png';
 
 const mainNav = [
     {
@@ -80,12 +80,14 @@ const Header = () => {
                             <i className="bx bx-search"></i>
                         </div>
                         <div className="header__menu__item header__menu__right__item">
-                            <Link to="/cart">
+                            <Link to="/gio-hang">
                                 <i className="bx bx-shopping-bag"></i>
                             </Link>
                         </div>
                         <div className="header__menu__item header__menu__right__item">
-                            <i className="bx bx-user"></i>
+                            <Link to="/auth/dang-nhap">
+                                <i className="bx bx-user"></i>
+                            </Link>
                         </div>
                     </div>
                 </div>

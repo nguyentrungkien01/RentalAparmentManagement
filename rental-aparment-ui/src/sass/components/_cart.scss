@@ -1,27 +1,26 @@
 .cart {
-    @include flex(flex-start, flex-start);
+    @include flex(flex-end, flex-start);
+    flex-direction: column;
+    margin-top: calc(#{$header-shrink-height} + 20px);
 
-    @include mobile {
+    @include tablet {
         flex-wrap: wrap;
     }
 
     &__list {
-        width: 60%;
-
-        @include mobile {
-            width: 100%;
-        }
+        width: 100%;
     }
 
     &__info {
-        padding: 20px;
-        margin-right: 30px;
+        border-radius: 7px;
+        padding: 40px;
+        align-items: flex-end;
         margin-top: 30px;
         box-shadow: $box-shadow;
         position: sticky;
         top: calc(#{$header-shrink-height} + 20px);
 
-        @include mobile {
+        @include tablet {
             width: 100%;
             margin-right: 0;
             margin-bottom: 30px;
@@ -42,11 +41,16 @@
                 padding: 10px 0;
                 font-size: 1.25rem;
 
-                span:nth-child(2) {
-                    font-size: 2rem;
+                span span {
                     color: $main-color;
                     font-weight: 600;
                 }
+            }
+
+            &__warning {
+                font-size: 1.2rem;
+                color: $txt-danger;
+                font-weight: 600;
             }
         }
 

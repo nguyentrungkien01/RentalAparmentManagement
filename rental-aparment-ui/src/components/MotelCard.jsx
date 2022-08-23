@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
 
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-// import { set } from '../redux/product-modal/productModalSlice';
+import { set } from '../redux/product-modal/productModalSlice';
 
 import Button from './Button';
 
 import numberWithCommas from '../utils/numberWithCommas';
 
-const ProductCard = (props) => {
-    // const dispatch = useDispatch();
-
+const MotelCard = (props) => {
+    const dispatch = useDispatch();
+    
     return (
         <div className="product-card">
             <Link to={`/nha-tro/${props.slug}`}>
@@ -34,7 +34,7 @@ const ProductCard = (props) => {
                 </div>
             </Link>
             <div className="product-card__btn">
-                <Button size="sm" icon="bx bx-cart" animate={true}>
+                <Button size="sm" icon="bx bx-cart" animate={true} onClick={() => dispatch(set(props.slug))}>
                     Thuê phòng
                 </Button>
             </div>
@@ -42,13 +42,14 @@ const ProductCard = (props) => {
     );
 };
 
-ProductCard.propTypes = {
+MotelCard.propTypes = {
     img01: PropTypes.string.isRequired,
     img02: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    address: PropTypes.string,
     price: PropTypes.number.isRequired,
     old_price: PropTypes.number,
     slug: PropTypes.string.isRequired,
 };
 
-export default ProductCard;
+export default MotelCard;
