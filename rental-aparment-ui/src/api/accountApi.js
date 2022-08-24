@@ -13,9 +13,15 @@ const accountApi = {
         const url = `/Account/${id}`;
         return axiosClient.put(url);
     },
-    delete: (id) => {
+    delete: (id, token) => {
         const url = `/Account/${id}`;
-        return axiosClient.delete(url);
+        return axiosClient.delete(url, {
+            headers: {
+                Authorization: 'Bearer '+ token,
+                'Content-Type': 'application/json',
+                accept: 'application/json',
+            },
+        });
     },
 };
 

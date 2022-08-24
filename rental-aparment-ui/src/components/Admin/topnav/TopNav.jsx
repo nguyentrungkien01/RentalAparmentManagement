@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import '../topnav/topnav.css';
 
@@ -6,27 +6,22 @@ import { Link } from 'react-router-dom';
 
 import Dropdown from '../dropdown/Dropdown';
 
-import user_image from '../../../assets/images/avt1.jpg';
+import user_image from '../../../assets/images/user.png';
 
 import user_menu from '../../../assets/JsonData/user_menus.json';
 
-const curr_user = {
-    display_name: 'Thành Nam Nguyễn',
-    image: user_image,
-};
-
-const renderUserToggle = (user) => (
+const renderUserToggle = (username) => (
     <div className="topnav__right-user">
         <div className="topnav__right-user__image">
-            <img src={user.image} alt="" />
+            <img src={user_image} alt="" />
         </div>
-        <div className="topnav__right-user__name">{user.display_name}</div>
+        <div className="topnav__right-user__name">{username}</div>
     </div>
 );
 
 const renderUserMenu = (item, index) => (
     <Link to={item.href} key={index}>
-        <div className="notification-item">
+        <div className="notification-item" id={item.id !== null ? item.id : null}>
             <i className={item.icon}></i>
             <span>{item.content}</span>
         </div>
@@ -34,6 +29,18 @@ const renderUserMenu = (item, index) => (
 );
 
 const Topnav = () => {
+    useEffect(() => {
+        let log;
+        async function getLogout() {
+            log = document.getElementById('logout');
+            log.addEventListener('click', () => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('accountName');
+            });
+        }
+        getLogout();
+    }, []);
+
     return (
         <div className="topnav">
             <div className="topnav__search">
@@ -44,7 +51,7 @@ const Topnav = () => {
                 <div className="topnav__right-item">
                     {/* dropdown here */}
                     <Dropdown
-                        customToggle={() => renderUserToggle(curr_user)}
+                        customToggle={() => renderUserToggle(localStorage.getItem('accountName'))}
                         contentData={user_menu}
                         renderItems={(item, index) => renderUserMenu(item, index)}
                     />

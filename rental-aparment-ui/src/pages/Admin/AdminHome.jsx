@@ -24,7 +24,6 @@ function AdminHome() {
 
         fetchAccountList();
     }, []);
-
     return (
         <Helmet title="Admin | Trang tổng quan">
             <div>

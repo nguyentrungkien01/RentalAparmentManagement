@@ -12,6 +12,8 @@ import Signin from '../pages/Auth/Signin';
 
 import AdminHome from '../pages/Admin/AdminHome';
 import Customers from '../pages/Admin/Customer/Customers';
+import AddCustomer from '../pages/Admin/Customer/AddCustomer';
+import EditCustomer from '../pages/Admin/Customer/EditCustomer';
 import Posts from '../pages/Admin/Posts';
 
 // public Routes
@@ -55,7 +57,16 @@ const privateRoutes = [
     {
         path: '/admin/nguoi-dung',
         component: Customers,
-    },{
+    },
+    {
+        path: '/admin/nguoi-dung/them',
+        component: AddCustomer,
+    },
+    {
+        path: '/admin/nguoi-dung/chinh-sua:id',
+        component: EditCustomer,
+    },
+    {
         path: '/admin/bai-viet',
         component: Posts,
     },

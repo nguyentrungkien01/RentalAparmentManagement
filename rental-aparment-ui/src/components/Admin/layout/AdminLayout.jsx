@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 import '../../../sass/components/Admin/grid.css';
 import '../../../sass/components/Admin/index.css';
+import '../../../sass/components/Admin/button.css';
 import '../../../components/Admin/layout/layout.css';
 
 import Sidebar from '../sidebar/Sidebar';

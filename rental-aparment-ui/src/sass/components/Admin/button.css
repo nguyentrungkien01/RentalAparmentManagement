@@ -1,4 +1,4 @@
-.badge {
+.btn-handle {
     padding: 6px 11px;
     margin: 0 3px;
     color: var(--txt-white);
@@ -7,22 +7,22 @@
     transition: all 0.2s ease-in-out;
 }
 
-.badge:hover {
+.btn-handle:hover {
     filter: brightness(120%)
 }
 
-.badge-danger {
+.btn-handle-danger {
     background-color: var(--main-color-red);
 }
 
-.badge-success {
+.btn-handle-success {
     background-color: var(--main-color-green);
 }
 
-.badge-primary {
+.btn-handle-primary {
     background-color: var(--main-color-blue);
 }
 
-.badge-warning {
+.btn-handle-warning {
     background-color: var(--main-color-orange);
 }
