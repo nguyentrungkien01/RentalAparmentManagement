@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+
 import logo from '../../assets/images/Logo-2.png';
 
 const mainNav = [
@@ -45,6 +48,19 @@ const Header = () => {
 
     const menuToggle = () => menuLeft.current.classList.toggle('active');
 
+    // fake api account role
+    const role = ['guest', 'customer'];
+    const account = [
+        {
+            role: role[0],
+            name: 'test',
+        },
+        {
+            role: role[1],
+            name: 'test',
+        },
+    ];
+
     return (
         <div className="header" ref={headerRef}>
             <div className="container">
@@ -76,19 +92,47 @@ const Header = () => {
                         ))}
                     </div>
                     <div className="header__menu__right">
-                        <div className="header__menu__item header__menu__right__item">
-                            <i className="bx bx-search"></i>
-                        </div>
-                        <div className="header__menu__item header__menu__right__item">
-                            <Link to="/gio-hang">
-                                <i className="bx bx-shopping-bag"></i>
-                            </Link>
-                        </div>
-                        <div className="header__menu__item header__menu__right__item">
-                            <Link to="/auth/dang-nhap">
-                                <i className="bx bx-user"></i>
-                            </Link>
-                        </div>
+                        <Tippy content="Tìm kiếm">
+                            <div className="header__menu__item header__menu__right__item">
+                                <i className="bx bx-search"></i>
+                            </div>
+                        </Tippy>
+                        <Tippy content="Giỏ hàng">
+                            <div className="header__menu__item header__menu__right__item">
+                                <Link to="/gio-hang">
+                                    <i className="bx bx-shopping-bag"></i>
+                                </Link>
+                            </div>
+                        </Tippy>
+                        {account[1].role === 'guest' ? (
+                            <>
+                                <Tippy content="Quản lý bài viết">
+                                    <div className="header__menu__item header__menu__right__item">
+                                        <i className="bx bx-edit"></i>
+                                    </div>
+                                </Tippy>
+                                <Tippy content="Đăng xuất">
+                                    <div className="header__menu__item header__menu__right__item">
+                                        <i className="bx bx-log-out"></i>
+                                    </div>
+                                </Tippy>
+                                <Tippy content={`Chào ${account[1].name}`}>
+                                    <div className="header__menu__item header__menu__right__item">
+                                        <span style={{ fontSize: '1.2rem' }}> {account[1].name}</span>
+                                    </div>
+                                </Tippy>
+                            </>
+                        ) : (
+                            <>
+                                <Tippy content="Đăng nhập">
+                                    <div className="header__menu__item header__menu__right__item">
+                                        <Link to="/auth/dang-nhap">
+                                            <i className="bx bx-log-in"></i>
+                                        </Link>
+                                    </div>
+                                </Tippy>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

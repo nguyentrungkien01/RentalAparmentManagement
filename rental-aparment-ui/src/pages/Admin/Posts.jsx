@@ -2,7 +2,6 @@ import React from 'react';
 import Helmet from '../../components/Helmet';
 
 import Table from '../../components/Admin/table/Table';
-import Badge from '../../components/Admin/badge/Badge';
 
 import customerList from '../../assets/JsonData/customers-list.json';
 
@@ -20,9 +19,7 @@ const renderBody = (item, index) => (
         <td>{item.total_spend}</td>
         <td>{item.location}</td>
         <td>
-            <Badge type="success" content="Sửa"></Badge>
-            <Badge type="warning" content="Cập nhật"></Badge>
-            <Badge type="danger" content="Xoá"></Badge>
+            <button className="btn-handle btn-handle-primary">Thêm khách hàng</button>
         </td>
     </tr>
 );

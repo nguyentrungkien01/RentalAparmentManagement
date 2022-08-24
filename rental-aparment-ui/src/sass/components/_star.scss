@@ -1,0 +1,27 @@
+input[type="radio"] {
+    display: none;
+}
+
+.bxs-star {
+    font-size: 2rem;
+}
+.star-container {
+    text-align: right;
+    margin-bottom: 40px;
+    .star {
+        cursor: pointer;
+        transition: color 0.2;
+
+        &-desc {
+            margin-top: 10px;
+        }
+
+        &-yellow {
+            color: #ffc107;
+        }
+
+        &-gray {
+            color: #e4e5e9;
+        }
+    }
+}

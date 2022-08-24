@@ -6,8 +6,10 @@ import Section, { SectionBody, SectionTitle } from '../components/Section';
 import Grid from '../components/Grid';
 import MotelCard from '../components/MotelCard';
 import MotelView from '../components/MotelView';
+import CommentList from '../components/CommentList';
 
 import productData from '../fake-data/products';
+import comments from '../fake-data/comments';
 
 const Motel = () => {
     const slug = useParams();
@@ -25,6 +27,10 @@ const Motel = () => {
                 <SectionBody>
                     <MotelView product={product} />
                 </SectionBody>
+            </Section>
+
+            <Section>
+                <CommentList data={comments} />
             </Section>
 
             <Section>

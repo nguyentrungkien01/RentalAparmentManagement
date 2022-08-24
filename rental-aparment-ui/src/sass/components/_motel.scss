@@ -7,7 +7,7 @@
 
     &__images {
         @include flex(flex-start, flex-start);
-        width: 60%;
+        width: 65%;
         flex-wrap: wrap;
 
         @include tablet {
@@ -46,6 +46,7 @@
         position: sticky;
         top: $header-shrink-height;
         padding-top: 2rem;
+        margin-left: 20px;
 
         @include mobile {
             position: relative;
