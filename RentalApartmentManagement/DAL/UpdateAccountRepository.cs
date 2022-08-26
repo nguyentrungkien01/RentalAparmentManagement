@@ -19,7 +19,7 @@ namespace DAL
                 var ud = _dtContext.Account.Single(s => s.PhoneNumber == req.OldPhoneNumber);
                 int id = ud.Id;
                 string i = ud.FirstName;
-                // xu ly du lieu
+                
                 if (!CheckPhoneNumber(req.PhoneNumber, ud.Id))
                 {
                     return new CommonResponse
@@ -48,7 +48,7 @@ namespace DAL
                         Message = Message.INVALID
                     };
                 }
-                //
+                
                 ud.FirstName = req.FirstName;
                 ud.LastName = req.LastName;
                 ud.Gender = req.Gender;
