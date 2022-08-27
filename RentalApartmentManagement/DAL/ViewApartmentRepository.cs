@@ -13,7 +13,9 @@ namespace DAL
         {
             var req = (ViewApartmentRequestDTO)input;
             var baseResponse = new CommonResponse();
+
             List<Post> posts = _dtContext.Post.Where(s => s.Status == 1 && s.Address.Contains(req.Address)).ToList();
+
             if (req.FromPrice != 0)
             {
                 List<Post> result = new List<Post>();
