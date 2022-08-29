@@ -78,7 +78,7 @@ namespace BUS
                 Random generator = new Random();
                 Code = generator.Next(100000, 1000000);
                 string cont = Code + " là mã xác nhận đăng ký tài khoản của bạn. ";
-                if (!_mailUtil.Send(req.Email, "Hello", cont))
+                if (!_mailUtil.Send(req.Email, "YOLO Apartment", cont))
                 {
                     return new CommonResponse
                     {
