@@ -9,7 +9,6 @@ namespace DAL.Entity
 {
     public partial class OrderDetail
     {
-        public int Id { get; set; }
         public int PostId { get; set; }
         public int AccountId { get; set; }
         public DateTime? OrderDated { get; set; }

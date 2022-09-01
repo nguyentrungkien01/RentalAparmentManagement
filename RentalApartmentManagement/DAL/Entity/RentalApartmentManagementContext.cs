@@ -32,7 +32,7 @@ namespace DAL.Entity
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=.\\NGUYENTRUNGKIEN;Initial Catalog=RentalApartmentManagement;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=RentalApartmentManagement;Integrated Security=True");
             }
         }
 
@@ -41,15 +41,15 @@ namespace DAL.Entity
             modelBuilder.Entity<Account>(entity =>
             {
                 entity.HasIndex(e => e.Email)
-                    .HasName("UQ__Account__AB6E6164EFAB9372")
+                    .HasName("UQ__Account__AB6E6164E7185047")
                     .IsUnique();
 
                 entity.HasIndex(e => e.IdCard)
-                    .HasName("UQ__Account__8BA3E8F689709925")
+                    .HasName("UQ__Account__8BA3E8F6B410C818")
                     .IsUnique();
 
                 entity.HasIndex(e => e.PhoneNumber)
-                    .HasName("UQ__Account__4849DA0142535834")
+                    .HasName("UQ__Account__4849DA015A8F6406")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -167,7 +167,10 @@ namespace DAL.Entity
 
             modelBuilder.Entity<OrderDetail>(entity =>
             {
-                entity.Property(e => e.Id).HasColumnName("id");
+                entity.HasKey(e => new { e.PostId, e.AccountId })
+                    .HasName("PK__OrderDet__222A01CB9BFC2AC8");
+
+                entity.Property(e => e.PostId).HasColumnName("postId");
 
                 entity.Property(e => e.AccountId).HasColumnName("accountId");
 
@@ -179,8 +182,6 @@ namespace DAL.Entity
                     .HasColumnName("orderDated")
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.PostId).HasColumnName("postId");
 
                 entity.Property(e => e.PriceTotal)
                     .HasColumnName("priceTotal")
@@ -203,7 +204,7 @@ namespace DAL.Entity
             modelBuilder.Entity<Post>(entity =>
             {
                 entity.HasIndex(e => e.Title)
-                    .HasName("UQ__Post__E52A1BB3CB8B3FEE")
+                    .HasName("UQ__Post__E52A1BB304AB8C64")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
@@ -246,6 +247,11 @@ namespace DAL.Entity
                     .HasColumnType("decimal(18, 0)")
                     .HasDefaultValueSql("((0))");
 
+                entity.Property(e => e.Slug)
+                    .HasColumnName("slug")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Status)
                     .HasColumnName("status")
                     .HasDefaultValueSql("((0))");
@@ -265,7 +271,7 @@ namespace DAL.Entity
             modelBuilder.Entity<Rating>(entity =>
             {
                 entity.HasKey(e => new { e.AccountId, e.PostId })
-                    .HasName("PK__Rating__4FB7E2270ED74525");
+                    .HasName("PK__Rating__4FB7E227520347A9");
 
                 entity.Property(e => e.AccountId).HasColumnName("accountId");
 
@@ -291,7 +297,7 @@ namespace DAL.Entity
             modelBuilder.Entity<Role>(entity =>
             {
                 entity.HasIndex(e => e.Name)
-                    .HasName("UQ__Role__72E12F1B14561A18")
+                    .HasName("UQ__Role__72E12F1B37061A14")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("id");
