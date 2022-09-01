@@ -13,7 +13,7 @@ namespace DAL
         protected override IBaseResponse DoExcute(IBaseRequest input)
         {
             var baseResponse = new CommonResponse();
-            List<Post> posts = _dtContext.Post.Where(s => s.Status == 0).ToList();
+            List<Post> posts = _dtContext.Post.ToList();
             if(posts.Count > 0)
             {
                 foreach(var p in posts)
