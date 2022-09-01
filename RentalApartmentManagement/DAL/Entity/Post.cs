@@ -26,9 +26,9 @@ namespace DAL.Entity
         public int? Status { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
+        public string Slug { get; set; }
         public DateTime? DateCreated { get; set; }
         public int AccountId { get; set; }
-        public string Slug { get; set; }
 
         public virtual Account Account { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }

@@ -40,6 +40,7 @@ namespace DAL
                     post.Latitude = req.Latitude;
                     post.AccountId = req.AccountId;
                     post.DateCreated = DateTime.Now;
+                    post.Slug = req.Slug;
                     post.Status = 0;
                     _dtContext.Add(post);
                     _dtContext.SaveChanges();

@@ -15,6 +15,7 @@ namespace DTO.Request
         public string Longitude { get; set; }
         public string Latitude { get; set; }
         public int AccountId { get; set; }
+        public string Slug { get; set; }
         public List<IFormFile> formFiles;
     }
 }
