@@ -77,7 +77,8 @@ namespace Controller
 
             app.UseRouting();
 
-            app.UseCors();
+            app.UseCors(option =>  option.WithOrigins(Configuration["Cors:Domain"],"").AllowAnyHeader().AllowAnyMethod());
+            app.UseCors("CorsApi");
 
             app.UseAuthentication();
 

@@ -10,7 +10,7 @@ namespace Controller.Controllers
     public class AccountController : BaseController
     {
         [HttpPost]
-        [Authorize(Roles ="admin")]
+        //[Authorize(Roles ="admin")]
         public IBaseResponse Create([FromBody] UserCreateRequestDTO userCreateRequestDTO)
         {
             _baseService = new UserCreateService();
@@ -18,7 +18,7 @@ namespace Controller.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles ="admin")]
+        //[Authorize(Roles ="admin")]
         public IBaseResponse Read()
         {
             _baseService = new UserReadService();
@@ -27,7 +27,7 @@ namespace Controller.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles ="admin")]
+        //[Authorize(Roles ="admin")]
         public IBaseResponse Update([FromBody] UserUpdateRequestDTO userUpdateRequestDTO, [FromRoute] int id)
         {
             _baseService = new UserUpdateService();
@@ -36,7 +36,7 @@ namespace Controller.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles ="admin")]
+        //[Authorize(Roles ="admin")]
         public IBaseResponse Delete([FromRoute] UserDeleteRequestDTO userDeleteRequestDTO)
         {
             _baseService = new UserDeleteService();

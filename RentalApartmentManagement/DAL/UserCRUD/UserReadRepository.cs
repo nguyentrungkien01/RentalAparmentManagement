@@ -23,6 +23,7 @@ namespace DAL
                                                 account.PhoneNumber,
                                                 account.DateCreated,
                                                 account.Email,
+                                                account.Status,
                                                 account.Password,
                                                 Role = role.Name
                                             };
