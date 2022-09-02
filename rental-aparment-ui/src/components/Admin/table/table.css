@@ -18,11 +18,18 @@ tr {
 
 th,
 td {
-    text-transform: capitalize;
     padding: 15px 10px;
 }
 
-tbody > tr:hover {
+.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;
+    display: block;
+}
+
+tbody>tr:hover {
     background-color: var(--main-color);
     color: var(--txt-white);
 }
@@ -35,7 +42,7 @@ tbody > tr:hover {
     margin-top: 20px;
 }
 
-.table__pagination-item ~ .table__pagination-item {
+.table__pagination-item~.table__pagination-item {
     margin-left: 10px;
 }
 

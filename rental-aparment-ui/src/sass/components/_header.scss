@@ -79,7 +79,7 @@
 
             &__item {
                 @include flex(center, center);
-
+                margin-left: 15px;
                 @include tablet {
                     margin-left: 10px;
                 }

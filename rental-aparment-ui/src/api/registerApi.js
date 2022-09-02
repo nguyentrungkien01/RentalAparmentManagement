@@ -3,7 +3,7 @@ import axiosClient from './axiosClient';
 const registerApi = {
     postRegister: (params) => {
         const url = '/Register';
-        return axiosClient.post(url, { params });
+        return axiosClient.post(url, params);
     },
 };
 

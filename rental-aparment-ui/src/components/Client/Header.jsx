@@ -5,6 +5,7 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
 import logo from '../../assets/images/Logo-2.png';
+import { toast } from 'react-toastify';
 
 const mainNav = [
     {
@@ -12,7 +13,7 @@ const mainNav = [
         path: '/',
     },
     {
-        display: 'Địa điểm',
+        display: 'Địa điểm',                    
         path: '/dia-diem',
     },
     {
@@ -48,18 +49,17 @@ const Header = () => {
 
     const menuToggle = () => menuLeft.current.classList.toggle('active');
 
-    // fake api account role
-    const role = ['guest', 'customer'];
-    const account = [
-        {
-            role: role[0],
-            name: 'test',
-        },
-        {
-            role: role[1],
-            name: 'test',
-        },
-    ];
+    // api account info
+    const accountName = localStorage.getItem('accountName');
+    const accountRole = localStorage.getItem('role');
+    const accountToken = localStorage.getItem('token');
+
+    const removeAccountInfo = () => {
+        localStorage.removeItem('accountName');
+        localStorage.removeItem('role');
+        localStorage.removeItem('token');
+        toast.success('Đăng xuất thành công !', { theme: 'colored' });
+    };
 
     return (
         <div className="header" ref={headerRef}>
@@ -104,22 +104,36 @@ const Header = () => {
                                 </Link>
                             </div>
                         </Tippy>
-                        {account[1].role === 'guest' ? (
+                        {accountRole === 'user' && accountToken ? (
                             <>
-                                <Tippy content="Quản lý bài viết">
+                                <Tippy content="Tạo bài viết">
                                     <div className="header__menu__item header__menu__right__item">
-                                        <i className="bx bx-edit"></i>
+                                        <Link to="/tao-bai-viet">
+                                            <i className="bx bxs-edit"></i>
+                                        </Link>
                                     </div>
                                 </Tippy>
                                 <Tippy content="Đăng xuất">
                                     <div className="header__menu__item header__menu__right__item">
-                                        <i className="bx bx-log-out"></i>
+                                        <Link to="/" onClick={removeAccountInfo}>
+                                            <i className="bx bx-log-out"></i>
+                                        </Link>
                                     </div>
                                 </Tippy>
-                                <Tippy content={`Chào ${account[1].name}`}>
-                                    <div className="header__menu__item header__menu__right__item">
-                                        <span style={{ fontSize: '1.2rem' }}> {account[1].name}</span>
-                                    </div>
+                                <Tippy content={`Chào ${accountName}`}>
+                                  <Link to="/thong-tin-ca-nhan">
+                                        <div className="header__menu__item header__menu__right__item">
+                                            <span
+                                                style={{
+                                                    fontSize: '1.2rem',
+                                                    textTransform: 'capitalize',
+                                                    fontWeight: 'bold',
+                                                }}
+                                            >
+                                                {accountName}
+                                            </span>
+                                        </div>
+                                  </Link>
                                 </Tippy>
                             </>
                         ) : (

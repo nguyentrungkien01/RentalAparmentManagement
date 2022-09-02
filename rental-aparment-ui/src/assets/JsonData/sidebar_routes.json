@@ -13,5 +13,10 @@
         "display_name": "Bài viết",
         "route": "/admin/bai-viet",
         "icon": "bx bx-package"
+    },
+    {
+        "display_name": "Thống kê - Báo cáo",
+        "route": "/admin/thong-ke",
+        "icon": "bx bx-analyse"
     }
 ]

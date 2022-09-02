@@ -1,0 +1,70 @@
+$txt-danger: #ff0f0f;
+$box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+.account-form {
+    &__title {
+        margin-bottom: 50px;
+    }
+
+    .required {
+        color: $txt-danger;
+        margin-bottom: 15px;
+    }
+
+    .label-title {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 1.25rem;
+    }
+
+    &__input-field {
+        margin-bottom: 15px;
+        width: 50%;
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: $box-shadow;
+        }
+    }
+
+    .input-gender {
+        display: flex;
+        margin: 20px 0;
+
+        input[type="radio"] {
+            display: unset !important;
+            margin-right: 5px;
+        }
+
+        div {
+            margin-left: 25px;
+        }
+    }
+
+    .input-submit__btn {
+        background-color: #5995fd;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin: 10px 0;
+        padding: 15px;
+        cursor: pointer;
+        transition: 0.5s;
+
+        &:hover {
+            background-color: #4d84e2;
+        }
+    }
+}
+
+input:read-only {
+    background: #c2c2c2;
+}

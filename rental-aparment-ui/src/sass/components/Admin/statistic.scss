@@ -1,0 +1,20 @@
+.account-form__input-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .label-title {
+        font-weight: bold;
+        white-space: nowrap;
+        display: block;
+        margin-right: 20px;
+        margin-bottom: 5px;
+        .required {
+            color: #f00;
+        }
+    }
+    #amount {
+        width: 20%;
+        margin-right: 20px;
+    }
+}

@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
 
 import numberWithCommas from '../utils/numberWithCommas';
 
+import { toast } from 'react-toastify';
+
 const Cart = () => {
     const cartItems = useSelector((state) => state.cartItems.value);
 
@@ -23,19 +25,9 @@ const Cart = () => {
         setTotalPrice(cartItems.reduce((total, item) => total + Number(item.price), 0));
     }, [cartItems]);
 
-    // fake api account role
-    const role = ['guest', 'customer'];
-    const account = [
-        {
-            role: role[0],
-            name: 'test',
-        },
-        {
-            role: role[1],
-            name: 'test',
-        },
-    ];
-
+    // api account info
+    const accountRole = localStorage.getItem('role');
+    
     return (
         <Helmet title="Giỏ hàng">
             <div className="cart">
@@ -54,8 +46,8 @@ const Cart = () => {
                         </div>
                     </div>
                     <div className="cart__info__btn">
-                        {account[1].role === 'customer' ? (
-                            <Button size="block">Thanh toán</Button>
+                        {accountRole === 'user' ? (
+                            <Button size="block">Thanh toán momo</Button>
                         ) : (
                             <p className="cart__info__txt__warning">Bạn cần đăng nhập để thanh toán !</p>
                         )}
