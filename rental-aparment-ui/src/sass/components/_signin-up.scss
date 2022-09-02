@@ -43,6 +43,34 @@
         left: 0;
     }
 
+    .register-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #e3e3e354;
+        z-index: 9;
+
+        &__content {
+            position: fixed;
+            text-align: center;
+            top: 50%;
+            border-radius: 5px;
+            padding: 50px 100px;
+            left: 50%;
+            background: $txt-white;
+            transform: translate(-50%, -50%);
+            z-index: 999999;
+            box-shadow: $box-shadow;
+        }
+    }
+
+    .register-modal.active {
+        display: block;
+    }
+
     .signin-signup {
         position: absolute;
         top: 50%;
@@ -141,6 +169,10 @@
 
         label {
             margin-left: 5px;
+        }
+
+        input {
+            display: unset !important;
         }
     }
 }

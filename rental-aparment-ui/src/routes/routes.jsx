@@ -6,15 +6,18 @@ import Cart from '../pages/Cart';
 import Contact from '../pages/Contact';
 import Location from '../pages/Location';
 import Policy from '../pages/Policy';
+import PostCreate from '../pages/PostCreate';
 
 import Signup from '../pages/Auth/Signup';
 import Signin from '../pages/Auth/Signin';
 
 import AdminHome from '../pages/Admin/AdminHome';
-import Customers from '../pages/Admin/Customer/Customers';
-import AddCustomer from '../pages/Admin/Customer/AddCustomer';
-import EditCustomer from '../pages/Admin/Customer/EditCustomer';
+import Customers from '../pages/Admin/Customers';
+import AddCustomer from '../components/Admin/customer/AddCustomer';
+import EditCustomer from '../components/Admin/customer/EditCustomer';
 import Posts from '../pages/Admin/Posts';
+import Statistic from '../pages/Admin/Statistic';
+import AccountInfoItem from '../components/AccountInfoItem';
 
 // public Routes
 const publicRoutes = [
@@ -46,6 +49,14 @@ const publicRoutes = [
         path: '/gio-hang',
         component: Cart,
     },
+    {
+        path: '/tao-bai-viet',
+        component: PostCreate,
+    },
+    {
+        path: '/thong-tin-ca-nhan',
+        component: AccountInfoItem,
+    },
 ];
 
 // admin Routes
@@ -53,6 +64,10 @@ const privateRoutes = [
     {
         path: '/admin',
         component: AdminHome,
+    },
+    {
+        path: '/admin/thong-tin-ca-nhan',
+        component: AccountInfoItem,
     },
     {
         path: '/admin/nguoi-dung',
@@ -63,12 +78,16 @@ const privateRoutes = [
         component: AddCustomer,
     },
     {
-        path: '/admin/nguoi-dung/chinh-sua:id',
+        path: '/admin/nguoi-dung/chinh-sua/:id',
         component: EditCustomer,
     },
     {
         path: '/admin/bai-viet',
         component: Posts,
+    },
+    {
+        path: '/admin/thong-ke',
+        component: Statistic,
     },
 ];
 

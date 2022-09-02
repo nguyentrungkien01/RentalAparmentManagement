@@ -16,6 +16,8 @@ const Signin = () => {
     const navigate = useNavigate();
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState('');
+
     let passwordMD5;
 
     let handleApi = async (e) => {
@@ -30,6 +32,7 @@ const Signin = () => {
 
             if (response.code === 200) {
                 localStorage.setItem('token', response.token);
+                localStorage.setItem('role', response.data.Role);
                 localStorage.setItem('accountName', ` ${response.data.LastName} ${response.data.FirstName}`);
                 setPhoneNumber('');
                 setPassword('');
@@ -44,7 +47,10 @@ const Signin = () => {
     };
 
     useEffect(() => {
-        if (localStorage.getItem('token')) navigate('/admin');
+        if (localStorage.getItem('token')) {
+            if (localStorage.getItem('role') === 'admin') navigate('/admin');
+            if (localStorage.getItem('role') === 'user') navigate('/');
+        } else navigate('/auth/dang-nhap');
     }, [navigate]);
 
     return (
