@@ -51,24 +51,28 @@ const Motel = () => {
     }, [slug.slug]);
 
     let handleComment = async () => {
-        const content = document.querySelector('textarea');
-        try {
-            const params = {
-                content: content.value,
-                postId: motel.id,
-                phoneNumber: phoneNumber,
-            };
-            const response = await commentApi.post(params, token);
-            if (response.code === 200) {
-                toast.success('Comment thành công !', { theme: 'colored' });
-                content.value = '';
-                forceUpdate();
-            } else {
-                toast.error('Không thể rating 2 lần. Rating thất bại !', { theme: 'colored' });
+        if (token) {
+            const content = document.querySelector('textarea');
+            try {
+                const params = {
+                    content: content.value,
+                    postId: motel.id,
+                    phoneNumber: phoneNumber,
+                };
+                const response = await commentApi.post(params, token);
+                if (response.code === 200) {
+                    toast.success('Comment thành công !', { theme: 'colored' });
+                    content.value = '';
+                    forceUpdate();
+                } else {
+                    toast.error('Không thể rating 2 lần. Rating thất bại !', { theme: 'colored' });
+                }
+            } catch (error) {
+                console.log('Thất bại khi gửi dữ liệu: ', error.message);
+                toast.error('Thất bại khi gửi dữ liệu', { theme: 'colored' });
             }
-        } catch (error) {
-            console.log('Thất bại khi gửi dữ liệu: ', error.message);
-            toast.error('Thất bại khi gửi dữ liệu', { theme: 'colored' });
+        } else {
+            toast.error('Bạn cần đăng nhập để sử dụng tính năng này', { theme: 'colored' });
         }
     };
 

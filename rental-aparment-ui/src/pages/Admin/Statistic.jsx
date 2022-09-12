@@ -50,7 +50,7 @@ const Statistic = () => {
             <td>{item.likeAmount}</td>
             <td>{new Date(item.dateCreated).toLocaleDateString('vi-VI')}</td>
             <td>
-                <Link to={`/nha-tro/${item.slug}-q1`}>
+                <Link to={`/nha-tro/${item.slug}`}>
                     <button className="btn-handle btn-handle-success">Đến bài viết</button>
                 </Link>
             </td>

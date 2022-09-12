@@ -66,6 +66,10 @@ const PostCreate = () => {
 
                 if (response.code === 200) {
                     console.log(response);
+                    formik.values.title = '';
+                    formik.values.pricePerMonth = '';
+                    formik.values.address = '';
+                    formik.values.files = [];
                     toast.success('Đã gửi bài viết cho QTV kiểm duyệt !', { theme: 'colored' });
                 } else {
                     console.log(response.data, response.message);
