@@ -1,9 +1,15 @@
 import axiosClient from './axiosClient';
 
 const commentApi = {
-    post: (params) => {
+    post: (params, token) => {
         const url = '/Comment';
-        return axiosClient.post(url, { params });
+        return axiosClient.post(url, params, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json',
+                accept: 'application/json',
+            },
+        });
     },
 };
 

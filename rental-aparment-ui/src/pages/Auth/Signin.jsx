@@ -34,6 +34,7 @@ const Signin = () => {
                 localStorage.setItem('token', response.token);
                 localStorage.setItem('role', response.data.Role);
                 localStorage.setItem('accountName', ` ${response.data.LastName} ${response.data.FirstName}`);
+                localStorage.setItem('phoneNumber', response.data.PhoneNumber);
                 setPhoneNumber('');
                 setPassword('');
                 navigate('/admin');

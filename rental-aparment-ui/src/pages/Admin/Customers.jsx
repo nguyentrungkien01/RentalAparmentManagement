@@ -15,7 +15,7 @@ const Customers = () => {
     useEffect(() => {
         const fetchAccountList = async () => {
             try {
-                const response = await accountApi.getAll();
+                const response = await accountApi.getAll(token);
 
                 if (response.code !== 200) {
                     throw new Error(response.message);

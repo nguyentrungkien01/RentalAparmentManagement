@@ -1,9 +1,18 @@
 import axiosClient from './axiosClient';
 
 const likeApi = {
-    postUpdateLike: (params) => {
+    postUpdateLike: (params, token) => {
         const url = '/UpdateLike';
-        return axiosClient.post(url, { params });
+        return axiosClient.post(url, null, {
+            params,
+            ...{
+                headers: {
+                    Authorization: 'Bearer ' + token,
+                    'Content-Type': 'application/json',
+                    accept: 'application/json',
+                },
+            },
+        });
     },
 };
 

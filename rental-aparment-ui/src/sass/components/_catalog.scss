@@ -38,13 +38,23 @@
                 font-weight: 600;
                 text-transform: capitalize;
                 margin-bottom: 16px;
+
+                &__inner {
+                    font-size: 1rem;
+                    margin-bottom: 10px;
+                    margin-left: 10px;
+                    font-weight: 600;
+                }
             }
 
             &__content {
                 color: $txt-second-color;
 
-                &__item {
+                input {
                     margin-bottom: 13px;
+                    border: 1px solid $border-color;
+                    padding: 10px;
+                    display: block;
                 }
             }
         }

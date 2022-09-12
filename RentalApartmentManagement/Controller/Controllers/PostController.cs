@@ -18,7 +18,7 @@ namespace Controller.Controllers
         }
 
         [HttpPost("create")]
-        //[Authorize(Roles = "user")]
+        [Authorize(Roles = "user")]
         public IBaseResponse Create([FromForm] PostCreateRequestDTO postCreatRequestDTO, List<IFormFile> files)
         {
             postCreatRequestDTO.formFiles = files;
@@ -35,7 +35,7 @@ namespace Controller.Controllers
         }
 
         [HttpPut("approve/{id}")]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public IBaseResponse Approve([FromRoute] int id)
         {
             PostUpdateRequestDTO postUpdateRequestDTO = new PostUpdateRequestDTO();
@@ -45,7 +45,7 @@ namespace Controller.Controllers
         }
 
         [HttpPut("reject/{id}")]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public IBaseResponse Reject([FromRoute] int id)
         {
             PostUpdateRequestDTO postUpdateRequestDTO = new PostUpdateRequestDTO();
@@ -55,7 +55,7 @@ namespace Controller.Controllers
         }
 
         [HttpPut("delete/{id}")]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public IBaseResponse Delete([FromRoute] int id)
         {
             PostUpdateRequestDTO postUpdateRequestDTO = new PostUpdateRequestDTO();

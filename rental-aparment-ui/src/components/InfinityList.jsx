@@ -56,11 +56,11 @@ const InfinityList = (props) => {
                 {data.map((item, index) => (
                     <MotelCard
                         key={index}
-                        img01={item.image01}
-                        img02={item.image02}
+                        id={item.id}
+                        img01={item.image[0].path}
+                        img02={item.image[1].path}
                         name={item.title}
-                        price={Number(item.price)}
-                        old_price={Number(item.old_price)}
+                        price={Number(item.pricePerMonth)}
                         slug={item.slug}
                     />
                 ))}
