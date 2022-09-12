@@ -34,6 +34,8 @@ const Statistic = () => {
         };
 
         fetchAccountList();
+
+        return clearTimeout();
     }, [topAmount, token]);
 
     let tableHead = ['Top', 'Tên bài viết', 'Giá', 'Số lượt thích', 'Ngày tạo', 'Thao tác'];
@@ -56,7 +58,12 @@ const Statistic = () => {
     );
 
     const getTopLike = () => {
-        setTopAmount(Number.parseInt(document.getElementById('amount').value));
+        let value = document.getElementById('amount').value;
+        setTimeout(() => {
+            if (value !== '') {
+                setTopAmount(Number.parseInt(value));
+            } else setTopAmount(0);
+        }, 500);
     };
     return (
         <Helmet title="Thống kê">
@@ -65,10 +72,13 @@ const Statistic = () => {
                     <label htmlFor="amount" className="label-title">
                         Tìm kiếm theo số lượt thích <span className="required">*</span>
                     </label>
-                    <input id="amount" type="text" name="amount" placeholder="Nhập số dòng hiển thị..." />
-                    <button className="btn-handle btn-handle-success" onClick={getTopLike}>
-                        Tìm kiếm
-                    </button>
+                    <input
+                        id="amount"
+                        type="text"
+                        name="amount"
+                        placeholder="Nhập số dòng hiển thị..."
+                        onChange={getTopLike}
+                    />
                 </div>
 
                 <div className="card full-height">

@@ -10,6 +10,7 @@ import postApi from '../../api/postApi';
 import { toast } from 'react-toastify';
 
 function AdminHome() {
+    const token = localStorage.getItem('token');
     const navigate = useNavigate();
     const [accountList, setAccountList] = useState([]);
     useEffect(() => {
@@ -25,7 +26,7 @@ function AdminHome() {
     useEffect(() => {
         const fetchAccountList = async () => {
             try {
-                const response = await accountApi.getAll();
+                const response = await accountApi.getAll(token);
 
                 if (response.code !== 200) {
                     throw new Error(response.message);

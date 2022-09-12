@@ -15,9 +15,15 @@ const accountApi = {
             },
         });
     },
-    getAll: (params) => {
+    getAll: (token) => {
         const url = '/Account';
-        return axiosClient.get(url, { params });
+        return axiosClient.get(url, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'application/json',
+                accept: 'application/json',
+            },
+        });
     },
     getUserDetail: (token) => {
         const url = '/UserDetail';

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -14,11 +14,32 @@ import Grid from '../components/Grid';
 
 import heroSliderData from '../fake-data/hero-slider';
 import policy from '../fake-data/policy';
-import productData from '../fake-data/products';
 import locationData from '../fake-data/location';
 import bannerData from '../fake-data/banner';
 
+import postApi from '../api/postApi';
+
 const Home = () => {
+    const [motelList, setMotelList] = useState([]);
+
+    useEffect(() => {
+        const fetchMotelList = async () => {
+            try {
+                const response = await postApi.getAll();
+
+                if (response.code !== 200) {
+                    throw new Error(response.message);
+                } else {
+                    setMotelList(response.data);
+                }
+            } catch (error) {
+                console.log('Thất bại khi lấy danh sách bài viêt: ', error);
+            }
+        };
+
+        fetchMotelList();
+    }, []);
+
     var locationSettings = {
         dots: true,
         infinite: true,
@@ -114,18 +135,20 @@ const Home = () => {
                 <SectionTitle>Top nhà trọ được quan tâm</SectionTitle>
                 <SectionBody>
                     <Grid col={4} gap={20} mdCol={2} smCol={1}>
-                        {productData.getProducts(8).map((item, index) => (
-                            <MotelCard
-                                key={index}
-                                img01={item.image01}
-                                img02={item.image02}
-                                name={item.title}
-                                address={item.address}
-                                price={Number(item.price)}
-                                old_price={Number(item.old_price)}
-                                slug={item.slug}
-                            />
-                        ))}
+                        {motelList.map((item, index) => {
+                            if (index < 8)
+                                return (
+                                    <MotelCard
+                                        key={index}
+                                        img01={item.image[0].path}
+                                        img02={item.image[1].path}
+                                        name={item.title}
+                                        price={Number(item.pricePerMonth)}
+                                        slug={item.slug}
+                                    />
+                                );
+                            return null;
+                        })}
                     </Grid>
                 </SectionBody>
             </Section>
@@ -148,18 +171,20 @@ const Home = () => {
                 <SectionTitle>Nhà trọ mới cập nhật</SectionTitle>
                 <SectionBody>
                     <Grid col={4} gap={20} mdCol={2} smCol={1}>
-                        {productData.getProducts(8).map((item, index) => (
-                            <MotelCard
-                                key={index}
-                                img01={item.image01}
-                                img02={item.image02}
-                                name={item.title}
-                                address={item.address}
-                                price={Number(item.price)}
-                                old_price={Number(item.old_price)}
-                                slug={item.slug}
-                            />
-                        ))}
+                        {motelList.map((item, index) => {
+                            if (index < 4)
+                                return (
+                                    <MotelCard
+                                        key={index}
+                                        img01={item.image[0].path}
+                                        img02={item.image[1].path}
+                                        name={item.title}
+                                        price={Number(item.pricePerMonth)}
+                                        slug={item.slug}
+                                    />
+                                );
+                            return null;
+                        })}
                     </Grid>
                 </SectionBody>
             </Section>

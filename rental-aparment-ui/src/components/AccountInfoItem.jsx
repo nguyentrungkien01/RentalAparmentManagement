@@ -22,7 +22,6 @@ const AccountInfo = () => {
                 const response = await accountApi.getUserDetail(token);
                 if (response.code === 200) {
                     toast.success('Lấy dữ liệu tài khoản thành công !', { theme: 'colored' });
-                    console.log(response.data);
                     formik.values.lastName = response.data[0].lastName;
                     formik.values.firstName = response.data[0].firstName;
                     setSexChecked(response.data[0].gender);

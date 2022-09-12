@@ -4,7 +4,6 @@ import { Outlet } from 'react-router-dom';
 
 import Header from '../Client/Header';
 import Footer from '../Client/Footer';
-import MotelViewModal from '../MotelViewModal';
 
 const ClientLayout = () => {
     return (
@@ -16,7 +15,6 @@ const ClientLayout = () => {
                 </div>
             </div>
             <Footer />
-            <MotelViewModal />
         </>
     );
 };

@@ -9,6 +9,7 @@ import '../../../sass/components/Admin/input.scss';
 import { toast } from 'react-toastify';
 
 const EditCustomer = () => {
+    const token = localStorage.getItem('token');
     const navigate = useNavigate();
     const param = useParams();
     const formik = useFormik({
@@ -66,8 +67,7 @@ const EditCustomer = () => {
                     status: accountStatus,
                     roleId: accountRole,
                 };
-                console.log('params', params);
-                const response = await accountApi.put(params.id, params, localStorage.getItem('token'));
+                const response = await accountApi.put(params.id, params, token);
 
                 if (response.code === 200) {
                     toast.success('Cập nhật thành công !', { theme: 'colored' });
@@ -89,7 +89,7 @@ const EditCustomer = () => {
     useEffect(() => {
         const fetchAccount = async () => {
             try {
-                const response = await accountApi.getAll();
+                const response = await accountApi.getAll(token);
                 if (response.code === 200) {
                     toast.success('Lấy dữ liệu tài khoản thành công !', { theme: 'colored' });
                     response.data.map((account) => {

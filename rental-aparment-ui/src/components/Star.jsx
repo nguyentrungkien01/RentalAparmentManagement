@@ -1,8 +1,36 @@
 import React, { useState } from 'react';
 
-const Star = () => {
-    const [rating, setRating] = useState(null);
+import ratingApi from '../api/ratingApi';
+import { toast } from 'react-toastify';
+import { useRef } from 'react';
+
+const Star = (ratingInfo) => {
+    const [rating, setRating] = useState(ratingInfo.rating.rateAmount);
     const [hover, setHover] = useState(null);
+    const token = localStorage.getItem('token');
+    const phoneNumber = localStorage.getItem('phoneNumber');
+
+    const refAmount = useRef(null);
+    let handleComment = async () => {
+        try {
+            const params = {
+                postId: ratingInfo.postId,
+                rateAmount: refAmount.current,
+                phoneNumber: phoneNumber,
+            };
+            const response = await ratingApi.postRating(params, token);
+
+            if (response.code === 200) {
+                setRating(refAmount.current);
+                toast.success('Rating thành công !', { theme: 'colored' });
+            } else {
+                toast.error('Không thể rating 2 lần. Rating thất bại !', { theme: 'colored' });
+            }
+        } catch (error) {
+            console.log('Thất bại khi gửi dữ liệu: ', error.message);
+            toast.error('Thất bại khi gửi dữ liệu', { theme: 'colored' });
+        }
+    };
 
     return (
         <div className="star-container">
@@ -10,7 +38,15 @@ const Star = () => {
                 const ratingValue = i + 1;
                 return (
                     <label key={i}>
-                        <input type="radio" name="rating" value={ratingValue} onClick={() => setRating(ratingValue)} />
+                        <input
+                            type="radio"
+                            name="rating"
+                            value={ratingValue}
+                            onClick={() => {
+                                refAmount.current = ratingValue;
+                                handleComment();
+                            }}
+                        />
                         <i
                             className={`bx bxs-star ${ratingValue <= (rating || hover) ? 'star-yellow' : 'star-gray'}`}
                             onMouseEnter={() => setHover(ratingValue)}
@@ -20,7 +56,7 @@ const Star = () => {
                 );
             })}
             <p className="star-desc">
-                {rating !== null ? `Bạn đã đánh giá ${rating} sao` : 'Bạn chưa đánh giá bài viết này'}
+                {rating !== undefined ? `Bạn đã đánh giá ${rating} sao` : 'Bạn chưa đánh giá bài viết này'}
             </p>
         </div>
     );

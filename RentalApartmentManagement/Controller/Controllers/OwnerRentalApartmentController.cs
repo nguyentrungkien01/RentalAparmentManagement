@@ -17,7 +17,7 @@ namespace Controller.Controllers
         public OwnerRentalApartmentController() => _baseService = new OwnerRentalApartmentService();
 
         [HttpGet]
-        //[Authorize(Roles = "user")]
+        [Authorize(Roles = "user")]
         public IBaseResponse ViewOwnerRentalApartment()
         {
             return _baseService.Excute(new OwnerRentalApartmentRequestDTO

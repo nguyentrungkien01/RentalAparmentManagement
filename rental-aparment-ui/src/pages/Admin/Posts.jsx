@@ -13,6 +13,7 @@ import { toast } from 'react-toastify';
 import numberWithCommas from '../../utils/numberWithCommas';
 
 const Customers = () => {
+    const token = localStorage.getItem('token');
     const [accountList, setAccountList] = useState(null);
     const [postList, setPostList] = useState(null);
     const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
@@ -22,7 +23,7 @@ const Customers = () => {
     useEffect(() => {
         const fetchAccountList = async () => {
             try {
-                const response = await accountApi.getAll();
+                const response = await accountApi.getAll(token);
 
                 if (response.code !== 200) {
                     throw new Error(response.message);
@@ -84,7 +85,7 @@ const Customers = () => {
                 <td>{new Date(item.dateCreated).toLocaleDateString('vi-VI')}</td>
                 <td>{`${acc.lastName} ${acc.firstName}`}</td>
                 <td>
-                    <Link to={`/nha-tro/${item.slug}-q1`}>
+                    <Link to={`/nha-tro/${item.slug}`}>
                         <button className="btn-handle btn-handle-success">Đến bài viết</button>
                     </Link>
                     <button className="btn-handle btn-handle-danger" onClick={() => removePostHandler(item.id)}>
@@ -126,7 +127,7 @@ const Customers = () => {
 
     const removePostHandler = async (id) => {
         try {
-            const response = await postApi.putDelete(id);
+            const response = await postApi.putDelete(id, token);
             if (response.code === 200) {
                 forceUpdate();
                 console.log(response);
@@ -143,7 +144,7 @@ const Customers = () => {
 
     const rejectPostHandler = async (id) => {
         try {
-            const response = await postApi.putReject(id);
+            const response = await postApi.putReject(id, token);
             if (response.code === 200) {
                 forceUpdate();
                 console.log(response);
@@ -160,7 +161,7 @@ const Customers = () => {
 
     const approvePostHandler = async (id) => {
         try {
-            const response = await postApi.putApprove(id);
+            const response = await postApi.putApprove(id, token);
             if (response.code === 200) {
                 forceUpdate();
                 console.log(response);
@@ -201,7 +202,7 @@ const Customers = () => {
                     </div>
                 </div>
             </div>
-            
+
             <h2 className="page-header">
                 Danh sách bài viết cần duyệt
                 {postPending ? ` (${postPending.length})` : 0}

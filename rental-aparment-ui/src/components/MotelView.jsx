@@ -10,59 +10,123 @@ import Button from './Button';
 import numberWithCommas from '../utils/numberWithCommas';
 
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import paymentApi from '../api/paymentApi';
+import likeApi from '../api/likeApi';
 
 const MotelView = (props) => {
     const dispatch = useDispatch();
+    const token = localStorage.getItem('token');
 
-    let product = props.product;
-
-    if (product === undefined) {
-        product = {
-            title: '',
-            price: '',
-            oldPrice: '',
-            image01: null,
-            image02: null,
-            categorySlug: '',
-            slug: '',
-            description: '',
-        };
-    }
-
-    const [previewImg, setPreviewImg] = useState(product.image01);
+    const [previewImg, setPreviewImg] = useState(props.img01);
 
     const [descriptionExpand, setDescriptionExpand] = useState(false);
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
-        setPreviewImg(product.image01);
-    }, [product]);
+        setPreviewImg(props.img01);
+        setQuantity(1);
+    }, [props]);
 
-    const save = () => {
-        dispatch(
-            addItem({
-                slug: product.slug,
-                price: product.price,
-                address: product.address,
-            }),
-        );
-        alert('Thêm thành công');
+    const updateQuantity = (type) => {
+        if (type === 'plus') {
+            setQuantity(quantity + 1);
+        } else {
+            setQuantity(quantity - 1 < 1 ? 1 : quantity - 1);
+        }
+    };
+
+    let checkLiked = true;
+    const handleLike = async () => {
+        if (token) {
+            if (checkLiked) {
+                try {
+                    const params = {
+                        PostId: props.postId,
+                        Flag: 1,
+                    };
+                    const response = await likeApi.postUpdateLike(params, token);
+                    if (response.code === 200) {
+                        toast.success('Like thành công !', { theme: 'colored' });
+                        checkLiked = false;
+                        document.getElementById('like').innerHTML = `Lượt thích: ${response.data}`;
+                    } else {
+                        toast.error('Lỗi!', { theme: 'colored' });
+                    }
+                } catch (error) {
+                    console.log('Thất bại khi gửi dữ liệu: ', error.message);
+                    toast.error('Thất bại khi gửi dữ liệu', { theme: 'colored' });
+                }
+            } else {
+                toast.error('Đã like!', { theme: 'colored' });
+            }
+        } else {
+            toast.error('Bạn cần đăng nhập để được phép thích bài viết !', { theme: 'colored' });
+        }
     };
 
     function GoToCart() {
         let navigate = useNavigate();
 
-        const routeChange = () => {
-            dispatch(
-                addItem({
-                    slug: product.slug,
-                    price: product.price,
-                    address: product.address,
-                }),
-            );
-            dispatch(remove());
-            alert('Thêm thành công');
-            let path = `/gio-hang`;
-            navigate(path);
+        const routeChange = async () => {
+            if (token) {
+                if (
+                    dispatch(
+                        addItem({
+                            id: props.postId,
+                            name: props.name,
+                            slug: props.slug,
+                            pricePerMonth: props.pricePerMonth,
+                            address: props.address,
+                            quantity: quantity,
+                        }),
+                    )
+                ) {
+                    dispatch(remove());
+                    toast.success('Đặt thành công !', { theme: 'colored' });
+                    let path = `/gio-hang`;
+                    navigate(path);
+                }
+                // try {
+                //     const orderDetails = [
+                //         {
+                //             postId: props.postId,
+                //             monthAmount: quantity,
+                //             priceTotal: props.pricePerMonth * quantity,
+                //         },
+                //     ];
+                //     const params = { orderDetails };
+                //     const response = await paymentApi.postPay(params, token);
+                //     if (response.code === 200) {
+                //         if (
+                //             dispatch(
+                //                 addItem({
+                //                     id: props.postId,
+                //                     name: props.name,
+                //                     slug: props.slug,
+                //                     pricePerMonth: props.pricePerMonth,
+                //                     address: props.address,
+                //                     quantity: quantity,
+                //                 }),
+                //             )
+                //         ) {
+                //             dispatch(remove());
+                //             toast.success('Đặt thành công !', { theme: 'colored' });
+                //             let path = `/gio-hang`;
+                //             navigate(path);
+                //         }
+                //     } else {
+                //         console.log(response);
+                //         toast.error('Không thể rating 2 lần. Rating thất bại !', { theme: 'colored' });
+                //     }
+                // } catch (error) {
+                //     console.log('Thất bại khi gửi dữ liệu: ', error.message);
+                //     toast.error('Thất bại khi gửi dữ liệu', { theme: 'colored' });
+                // }
+            } else {
+                toast.error('Bạn cần đăng nhập để được phép đặt phòng !', { theme: 'colored' });
+            }
         };
 
         return (
@@ -77,20 +141,20 @@ const MotelView = (props) => {
             <div className="product__images">
                 <div className="product__images__list">
                     <div className="product__images__list__item">
-                        <img src={product.image01} alt={product.title} onClick={() => setPreviewImg(product.image01)} />
+                        <img src={props.img01} alt={props.title} onClick={() => setPreviewImg(props.img01)} />
                     </div>
                     <div className="product__images__list__item">
-                        <img src={product.image02} alt={product.title} onClick={() => setPreviewImg(product.image02)} />
+                        <img src={props.img02} alt={props.title} onClick={() => setPreviewImg(props.img02)} />
                     </div>
                 </div>
                 <div className="product__images__main">
-                    <img src={previewImg} alt={product.title} />
+                    <img src={previewImg} alt={props.title} />
                 </div>
                 <div className={`product-description ${descriptionExpand ? 'expand' : ''}`}>
                     <div className="product-description__title">Chi tiết nhà trọ</div>
                     <div
                         className="product-description__content"
-                        dangerouslySetInnerHTML={{ __html: product.description }}
+                        dangerouslySetInnerHTML={{ __html: props.content }}
                     ></div>
                     <div className="product-description__toggle">
                         <Button size="sm" onClick={() => setDescriptionExpand(!descriptionExpand)}>
@@ -100,25 +164,45 @@ const MotelView = (props) => {
                 </div>
             </div>
             <div className="product__info">
-                <h1 className="product__info__title">{product.title}</h1>
+                <h1 className="product__info__title">{props.title}</h1>
                 <div className="product__info__item">
-                    <span className="product__info__item__price">{numberWithCommas(product.price)}</span>
-                    <p className="product__info__item__address">Địa chỉ: {product.address}</p>
-                </div>
-                <div className="product__info__item">
-                    <Button onClick={() => save()} size="sm">
-                        Lưu
+                    <span className="product__info__item__price">
+                        {numberWithCommas(Number.parseInt(props.pricePerMonth))} vnđ
+                    </span>
+                    <p className="product__info__item__address">Địa chỉ: {props.address}</p>
+                    {props.likeAmount ? (
+                        <>
+                            <p className="product__info__item__address" id="like">
+                                Lượt thích: {props.likeAmount}
+                            </p>
+                        </>
+                    ) : (
+                        <p className="product__info__item__address" id="like">
+                            Lượt thích: 0
+                        </p>
+                    )}
+                    <Button size="sm" onClick={() => handleLike()}>
+                        👍 Thích
                     </Button>
-                    {GoToCart()}
                 </div>
                 <div className="product__info__item">
-                    <Button size="sm">Chỉ đường</Button>
+                    <div className="product__info__item__title">Số tháng thuê</div>
+                    <div className="product__info__item__quantity">
+                        <div className="product__info__item__quantity__btn" onClick={() => updateQuantity('minus')}>
+                            <i className="bx bx-minus"></i>
+                        </div>
+                        <div className="product__info__item__quantity__input">{quantity}</div>
+                        <div className="product__info__item__quantity__btn" onClick={() => updateQuantity('plus')}>
+                            <i className="bx bx-plus"></i>
+                        </div>
+                    </div>
                 </div>
+                <div className="product__info__item">{GoToCart()}</div>
                 <div className={`product-description mobile ${descriptionExpand ? 'expand' : ''}`}>
                     <div className="product-description__title">Chi tiết nhà trọ</div>
                     <div
                         className="product-description__content"
-                        dangerouslySetInnerHTML={{ __html: product.description }}
+                        dangerouslySetInnerHTML={{ __html: props.content }}
                     ></div>
                     <div className="product-description__toggle">
                         <Button size="sm" onClick={() => setDescriptionExpand(!descriptionExpand)}>
@@ -130,9 +214,15 @@ const MotelView = (props) => {
         </div>
     );
 };
-
 MotelView.propTypes = {
-    product: PropTypes.object,
+    img01: PropTypes.string,
+    img02: PropTypes.string,
+    name: PropTypes.string,
+    address: PropTypes.string,
+    pricePerMonth: PropTypes.number,
+    slug: PropTypes.string,
+    content: PropTypes.string,
+    likeAmount: PropTypes.number,
+    postId: PropTypes.number,
 };
-
 export default MotelView;

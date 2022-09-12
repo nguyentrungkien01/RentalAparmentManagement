@@ -1,13 +1,26 @@
 import axiosClient from './axiosClient';
 
 const paymentApi = {
-    postMomo: (params) => {
+    postMomo: (params, token) => {
         const url = '/Payment/momo';
-        return axiosClient.post(url, { params });
+        return axiosClient.post(url, params, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'multipart/form-data',
+                accept: 'application/json',
+            },
+        });
     },
-    postPay: (params) => {
+    postPay: (params, token) => {
         const url = '/Payment/pay';
-        return axiosClient.post(url, { params });
+        console.log(params);
+        return axiosClient.post(url, params, {
+            headers: {
+                Authorization: 'Bearer ' + token,
+                'Content-Type': 'multipart/form-data',
+                accept: 'application/json',
+            },
+        });
     },
 };
 

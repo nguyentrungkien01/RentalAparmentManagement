@@ -21,7 +21,7 @@ namespace Controller.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "user")]
+        [Authorize(Roles = "user")]
         public IBaseResponse UpdateAccount([FromBody] UpdateAccountRequestDTO req)
         {
             ClaimsIdentity Identity = HttpContext.User.Identity as ClaimsIdentity;

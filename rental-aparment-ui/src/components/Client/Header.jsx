@@ -13,7 +13,7 @@ const mainNav = [
         path: '/',
     },
     {
-        display: 'Địa điểm',                    
+        display: 'Địa điểm',
         path: '/dia-diem',
     },
     {
@@ -58,6 +58,7 @@ const Header = () => {
         localStorage.removeItem('accountName');
         localStorage.removeItem('role');
         localStorage.removeItem('token');
+        localStorage.removeItem('phoneNumber');
         toast.success('Đăng xuất thành công !', { theme: 'colored' });
     };
 
@@ -66,7 +67,10 @@ const Header = () => {
             <div className="container">
                 <div className="header__logo">
                     <Link to="/">
-                        <img src={logo} alt="" />
+                        <img
+                            src="https://res.cloudinary.com/dqifjhxxg/image/upload/v1662174243/RentalApartmenntManagement/Motels/Logo-2_ddg97u.png"
+                            alt=""
+                        />
                     </Link>
                 </div>
                 <div className="header__menu">
@@ -121,7 +125,7 @@ const Header = () => {
                                     </div>
                                 </Tippy>
                                 <Tippy content={`Chào ${accountName}`}>
-                                  <Link to="/thong-tin-ca-nhan">
+                                    <Link to="/thong-tin-ca-nhan">
                                         <div className="header__menu__item header__menu__right__item">
                                             <span
                                                 style={{
@@ -133,7 +137,7 @@ const Header = () => {
                                                 {accountName}
                                             </span>
                                         </div>
-                                  </Link>
+                                    </Link>
                                 </Tippy>
                             </>
                         ) : (

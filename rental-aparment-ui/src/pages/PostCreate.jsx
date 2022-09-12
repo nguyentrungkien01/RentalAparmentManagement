@@ -1,18 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Section, { SectionBody, SectionTitle } from '../components/Section';
+import { toast } from 'react-toastify';
+import postApi from '../api/postApi';
+import accountApi from '../api/accountApi';
+
 const PostCreate = () => {
+    const token = localStorage.getItem('token');
+
+    useEffect(() => {
+        const fetchAccount = async () => {
+            try {
+                const response = await accountApi.getUserDetail(token);
+                if (response.code === 200) {
+                    console.log(response);
+                } else {
+                    toast.error('Thất bại khi lấy dữ liệu ! ' + response.message, { theme: 'colored' });
+                    throw new Error(response.message);
+                }
+            } catch (error) {
+                toast.error('Thất bại khi lấy thông tin tài khoản ! ' + error.message, { theme: 'colored' });
+                console.log('Thất bại khi lấy thông tin tài khoản: ', error);
+            }
+        };
+
+        fetchAccount();
+    }, []);
+
     const formik = useFormik({
         initialValues: {
             title: '',
             content: '',
-            pricePerMonth: '',
+            pricePerMonth: 0,
             address: '',
-            longitude: '',
-            latitude: '',
-            accountId: '',
-            file: [],
+            longitude: '0',
+            latitude: '0',
+            accountId: 0,
+            files: [],
         },
         validationSchema: Yup.object({
             title: Yup.string().required('Vui lòng nhập tiêu đề !').min(10, 'Tối thiểu 10 ký tự !'),
@@ -21,22 +46,39 @@ const PostCreate = () => {
                 .required('Vui lòng nhập giá !')
                 .matches(/^[0-9]*$/, 'Phải là định dạng số !'),
             address: Yup.string().required('Vui lòng nhập địa chỉ !').min(10, 'Tối thiểu 10 ký tự !'),
-            file: Yup.mixed().required('Vui lòng upload file !'),
+            // files: Yup.mixed().required('Vui lòng upload file !'),
         }),
-        onSubmit: (values) => {
-            // axios
-            //     .post('https://reqres.in/api/register', {
-            //         email: values.name,
-            //         password: values.password,
-            //     })
-            //     .then((result) => {
-            //         navigate('/');
-            //     })
-            //     .catch((error) => {
-            //         alert('service error');
-            //     });
-            // navigate('/auth/dang-nhap');
-            console.log(values);
+        onSubmit: async (values) => {
+            try {
+                const params = {
+                    Title: values.title,
+                    Content: values.content,
+                    PricePerMonth: values.pricePerMonth,
+                    Address: values.address,
+                    Longitude: values.longitude,
+                    Latitude: values.latitude,
+                    AccountId: 21,
+                    Slug: toSlug(values.title),
+                    files: values.files,
+                };
+                // console.log(params);
+                const response = await postApi.post(params, token);
+
+                if (response.code === 200) {
+                    console.log(response);
+                    toast.success('Đã gửi bài viết cho QTV kiểm duyệt !', { theme: 'colored' });
+                } else {
+                    console.log(response.data, response.message);
+
+                    toast.error('Tạo bài viết thất bại ! ' + response.data, {
+                        theme: 'colored',
+                    });
+                }
+            } catch (error) {
+                console.log('Thất bại khi gửi dữ liệu: ', error);
+                toast.error('Thất bại khi gửi dữ liệu ! ' + error.message, { theme: 'colored' });
+            }
+            // console.log(values);
         },
     });
 
@@ -145,11 +187,11 @@ const PostCreate = () => {
                                     type="file"
                                     name="file"
                                     multiple
-                                    value={formik.values.file}
-                                    onChange={formik.handleChange}
+                                    // value={formik.values.files}
+                                    // onChange={formik.handleChange}
                                 />
                             </div>
-                            {formik.errors.file && <p className="required"> {formik.errors.file} </p>}
+                            {formik.errors.files && <p className="required"> {formik.errors.files} </p>}
 
                             <input type="submit" className="form-submit__btn" value="Đăng bài viết" />
                         </form>
