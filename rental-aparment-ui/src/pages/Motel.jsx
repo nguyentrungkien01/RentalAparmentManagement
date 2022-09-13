@@ -53,6 +53,7 @@ const Motel = () => {
     let handleComment = async () => {
         const content = document.querySelector('textarea');
         if (content.value.trim().length) {
+
             try {
                 const params = {
                     content: content.value,

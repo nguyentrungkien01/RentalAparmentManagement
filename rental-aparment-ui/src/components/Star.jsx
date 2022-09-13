@@ -12,23 +12,27 @@ const Star = (ratingInfo) => {
 
     const refAmount = useRef(null);
     let handleComment = async () => {
-        try {
-            const params = {
-                postId: ratingInfo.postId,
-                rateAmount: refAmount.current,
-                phoneNumber: phoneNumber,
-            };
-            const response = await ratingApi.postRating(params, token);
+        if (token) {
+            try {
+                const params = {
+                    postId: ratingInfo.postId,
+                    rateAmount: refAmount.current,
+                    phoneNumber: phoneNumber,
+                };
+                const response = await ratingApi.postRating(params, token);
 
-            if (response.code === 200) {
-                setRating(refAmount.current);
-                toast.success('Rating thành công !', { theme: 'colored' });
-            } else {
-                toast.error('Không thể rating 2 lần. Rating thất bại !', { theme: 'colored' });
+                if (response.code === 200) {
+                    setRating(refAmount.current);
+                    toast.success('Rating thành công !', { theme: 'colored' });
+                } else {
+                    toast.error('Không thể rating 2 lần. Rating thất bại !', { theme: 'colored' });
+                }
+            } catch (error) {
+                console.log('Thất bại khi gửi dữ liệu: ', error.message);
+                toast.error('Thất bại khi gửi dữ liệu', { theme: 'colored' });
             }
-        } catch (error) {
-            console.log('Thất bại khi gửi dữ liệu: ', error.message);
-            toast.error('Thất bại khi gửi dữ liệu', { theme: 'colored' });
+        } else {
+            toast.error('Bạn cần đăng nhập để sử dụng tính năng này', { theme: 'colored' });
         }
     };
 
