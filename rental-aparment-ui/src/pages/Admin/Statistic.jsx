@@ -70,7 +70,7 @@ const Statistic = () => {
             <div className="col-9">
                 <div className="account-form__input-field">
                     <label htmlFor="amount" className="label-title">
-                        Tìm kiếm theo số lượt thích <span className="required">*</span>
+                        Thống kê top lượt thích (nhập số dòng muốn hiển thị) <span className="required">*</span>
                     </label>
                     <input
                         id="amount"

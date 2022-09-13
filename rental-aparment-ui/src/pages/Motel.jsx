@@ -52,25 +52,39 @@ const Motel = () => {
 
     let handleComment = async () => {
         const content = document.querySelector('textarea');
-        try {
-            const params = {
-                content: content.value,
-                postId: motel.id,
-                phoneNumber: phoneNumber,
-            };
-            const response = await commentApi.post(params, token);
-            if (response.code === 200) {
-                toast.success('Comment thành công !', { theme: 'colored' });
-                content.value = '';
-                forceUpdate();
-            } else {
-                toast.error('Không thể rating 2 lần. Rating thất bại !', { theme: 'colored' });
+        if (content.value.trim().length) {
+            try {
+                const params = {
+                    content: content.value,
+                    postId: motel.id,
+                    phoneNumber: phoneNumber,
+                };
+                const response = await commentApi.post(params, token);
+                if (response.code === 200) {
+                    toast.success('Comment thành công !', { theme: 'colored' });
+                    content.value = '';
+                    forceUpdate();
+                } else {
+                    toast.error('Không thể rating 2 lần. Rating thất bại !', { theme: 'colored' });
+                }
+            } catch (error) {
+                console.log('Thất bại khi gửi dữ liệu: ', error.message);
+                toast.error('Thất bại khi gửi dữ liệu', { theme: 'colored' });
             }
-        } catch (error) {
-            console.log('Thất bại khi gửi dữ liệu: ', error.message);
-            toast.error('Thất bại khi gửi dữ liệu', { theme: 'colored' });
-        }
+        } else toast.error('Vui lòng không để trống bình luận !', { theme: 'colored' });
     };
+
+    // fix image file 404
+    if (motel) {
+        if (motel.image.length === 0) {
+            motel.image.push({
+                path: 'https://res.cloudinary.com/dqifjhxxg/image/upload/v1662174238/RentalApartmenntManagement/Motels/products/home-01_1_dzqwoi.jpg',
+            });
+            motel.image.push({
+                path: 'https://res.cloudinary.com/dqifjhxxg/image/upload/v1662174239/RentalApartmenntManagement/Motels/products/home-01_2_ny6lqs.jpg',
+            });
+        }
+    }
 
     return (
         <Helmet title={`${motel ? motel.title : 'Nhà trọ'}`}>
@@ -95,7 +109,7 @@ const Motel = () => {
                     <Section>
                         <div className="comment-container">
                             <div className="comment-input">
-                                <textarea rows="5" placeholder="Bình luận tại đây ..."></textarea>
+                                <textarea rows="5" placeholder="Bình luận tại đây ..." id="comment"></textarea>
                                 <div className="comment-input__action">
                                     <Button size="sm" onClick={() => handleComment()}>
                                         Bình luận
