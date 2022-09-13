@@ -37,8 +37,8 @@ const Signin = () => {
                 localStorage.setItem('phoneNumber', response.data.PhoneNumber);
                 setPhoneNumber('');
                 setPassword('');
-                if (response.data.Role === 'user') navigate('/');
-                else if (response.data.Role === 'admin') navigate('/admin');
+                if (response.data.Role === 'admin') navigate('/admin');
+                else if (response.data.Role === 'user') navigate('/');
             } else {
                 toast.error('Đăng nhập thất bại, vui lòng kiểm tra thông tin !', { theme: 'colored' });
             }

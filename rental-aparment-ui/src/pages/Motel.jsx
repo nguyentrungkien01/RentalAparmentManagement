@@ -51,8 +51,9 @@ const Motel = () => {
     }, [slug.slug]);
 
     let handleComment = async () => {
-        if (token) {
-            const content = document.querySelector('textarea');
+        const content = document.querySelector('textarea');
+        if (content.value.trim().length) {
+
             try {
                 const params = {
                     content: content.value,
@@ -71,10 +72,20 @@ const Motel = () => {
                 console.log('Thất bại khi gửi dữ liệu: ', error.message);
                 toast.error('Thất bại khi gửi dữ liệu', { theme: 'colored' });
             }
-        } else {
-            toast.error('Bạn cần đăng nhập để sử dụng tính năng này', { theme: 'colored' });
-        }
+        } else toast.error('Vui lòng không để trống bình luận !', { theme: 'colored' });
     };
+
+    // fix image file 404
+    if (motel) {
+        if (motel.image.length === 0) {
+            motel.image.push({
+                path: 'https://res.cloudinary.com/dqifjhxxg/image/upload/v1662174238/RentalApartmenntManagement/Motels/products/home-01_1_dzqwoi.jpg',
+            });
+            motel.image.push({
+                path: 'https://res.cloudinary.com/dqifjhxxg/image/upload/v1662174239/RentalApartmenntManagement/Motels/products/home-01_2_ny6lqs.jpg',
+            });
+        }
+    }
 
     return (
         <Helmet title={`${motel ? motel.title : 'Nhà trọ'}`}>
@@ -99,7 +110,7 @@ const Motel = () => {
                     <Section>
                         <div className="comment-container">
                             <div className="comment-input">
-                                <textarea rows="5" placeholder="Bình luận tại đây ..."></textarea>
+                                <textarea rows="5" placeholder="Bình luận tại đây ..." id="comment"></textarea>
                                 <div className="comment-input__action">
                                     <Button size="sm" onClick={() => handleComment()}>
                                         Bình luận

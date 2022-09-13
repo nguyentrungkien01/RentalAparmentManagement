@@ -14,7 +14,7 @@ const PostCreate = () => {
             try {
                 const response = await accountApi.getUserDetail(token);
                 if (response.code === 200) {
-                    console.log(response);
+                    console.log(response, 'Lấy dữ liệu tài khoản thành công');
                 } else {
                     toast.error('Thất bại khi lấy dữ liệu ! ' + response.message, { theme: 'colored' });
                     throw new Error(response.message);
@@ -46,43 +46,49 @@ const PostCreate = () => {
                 .required('Vui lòng nhập giá !')
                 .matches(/^[0-9]*$/, 'Phải là định dạng số !'),
             address: Yup.string().required('Vui lòng nhập địa chỉ !').min(10, 'Tối thiểu 10 ký tự !'),
-            // files: Yup.mixed().required('Vui lòng upload file !'),
+            files: Yup.mixed().required('Vui lòng upload file !'),
         }),
         onSubmit: async (values) => {
-            try {
-                const params = {
-                    Title: values.title,
-                    Content: values.content,
-                    PricePerMonth: values.pricePerMonth,
-                    Address: values.address,
-                    Longitude: values.longitude,
-                    Latitude: values.latitude,
-                    AccountId: 21,
-                    Slug: toSlug(values.title),
-                    files: values.files,
-                };
-                // console.log(params);
-                const response = await postApi.post(params, token);
+            let amountFileUpload = document.getElementById('files');
+            if (amountFileUpload.files.length >= 2) {
+                try {
+                    const params = {
+                        Title: values.title,
+                        Content: values.content,
+                        PricePerMonth: values.pricePerMonth,
+                        Address: values.address,
+                        Longitude: values.longitude,
+                        Latitude: values.latitude,
+                        AccountId: 21,
+                        Slug: toSlug(values.title),
+                        files: values.files,
+                    };
+                    console.log(params);
+                    const response = await postApi.post(params, token);
 
-                if (response.code === 200) {
-                    console.log(response);
-                    formik.values.title = '';
-                    formik.values.pricePerMonth = '';
-                    formik.values.address = '';
-                    formik.values.files = [];
-                    toast.success('Đã gửi bài viết cho QTV kiểm duyệt !', { theme: 'colored' });
-                } else {
-                    console.log(response.data, response.message);
+                    if (response.code === 200) {
+                        console.log(response);
+                        formik.values.title = '';
+                        formik.values.pricePerMonth = '';
+                        formik.values.address = '';
+                        formik.values.files = [];
+                        toast.success('Đã gửi bài viết cho QTV kiểm duyệt !', { theme: 'colored' });
+                    } else {
+                        console.log(response.data, response.message);
 
-                    toast.error('Tạo bài viết thất bại ! ' + response.data, {
-                        theme: 'colored',
-                    });
+                        toast.error('Tạo bài viết thất bại ! ' + response.data, {
+                            theme: 'colored',
+                        });
+                    }
+                } catch (error) {
+                    console.log('Thất bại khi gửi dữ liệu: ', error);
+                    toast.error('Thất bại khi gửi dữ liệu ! ' + error.message, { theme: 'colored' });
                 }
-            } catch (error) {
-                console.log('Thất bại khi gửi dữ liệu: ', error);
-                toast.error('Thất bại khi gửi dữ liệu ! ' + error.message, { theme: 'colored' });
+            } else {
+                toast.error('Số lượng ảnh upload ít nhất từ 2 ! ', {
+                    theme: 'colored',
+                });
             }
-            // console.log(values);
         },
     });
 
@@ -129,13 +135,6 @@ const PostCreate = () => {
                                 />
                             </div>
                             {formik.errors.title && <p className="required"> {formik.errors.title} </p>}
-
-                            <div className="input-form">
-                                <label htmlFor="slug" className="label-title">
-                                    Slug <span className="required">*</span>
-                                </label>
-                                <input id="slug" type="text" name="slug" value={toSlug(formik.values.title)} readOnly />
-                            </div>
 
                             <div className="input-form">
                                 <label htmlFor="content" className="label-title">
@@ -187,12 +186,12 @@ const PostCreate = () => {
                                     Upload files <span className="required">*</span>
                                 </label>
                                 <input
-                                    id="file"
+                                    id="files"
                                     type="file"
-                                    name="file"
-                                    multiple
+                                    name="files"
+                                    multiple="multiple"
                                     // value={formik.values.files}
-                                    // onChange={formik.handleChange}
+                                    onChange={formik.handleChange}
                                 />
                             </div>
                             {formik.errors.files && <p className="required"> {formik.errors.files} </p>}

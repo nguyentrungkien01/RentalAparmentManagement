@@ -51,7 +51,7 @@ namespace BUS
             else {
                 var message = String.Format("You rent {0} the bill with at {1}",
                     baseResponse.Data, DateTime.Now);
-                _SMSUtil.SendSMS("+13344534854", "+84982482975", message);
+                //_SMSUtil.SendSMS("+13344534854", "+84982482975", message);
                 baseResponse.Message = Message.OK;
                 baseResponse.Code = Code.OK;
             }

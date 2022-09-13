@@ -118,6 +118,9 @@ const Cart = () => {
     useEffect(() => {
         let params = new URLSearchParams(window.location.search);
         const resultCode = params.get('resultCode');
+        let orderDetails = cartItems.map((item, i) => {
+            return { postId: item.id, monthAmount: item.quantity, priceTotal: item.pricePerMonth * item.quantity };
+        });
         if (resultCode != null) {
             if (parseInt(resultCode) === 1004) {
                 toast.warning('Đặt hàng thất bại do số tiền thanh toán vượt quá hạn mức thanh toán của bạn', {
@@ -131,6 +134,9 @@ const Cart = () => {
                 toast.warning('Đặt hàng thất bại do lỗi hệ thống', { theme: 'colored' });
             } else if (parseInt(resultCode) === 0) {
                 toast.success('Thanh toán thành công !', { theme: 'colored' });
+                const params = { orderDetails };
+                const response = paymentApi.postPay(params, token);
+                console.log(response);
                 cartItems.forEach((item, index) => {
                     dispatch(removeItem(item));
                 });

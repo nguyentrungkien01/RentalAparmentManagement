@@ -12,7 +12,6 @@ import numberWithCommas from '../utils/numberWithCommas';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import paymentApi from '../api/paymentApi';
 import likeApi from '../api/likeApi';
 
 const MotelView = (props) => {
@@ -88,42 +87,6 @@ const MotelView = (props) => {
                     let path = `/gio-hang`;
                     navigate(path);
                 }
-                // try {
-                //     const orderDetails = [
-                //         {
-                //             postId: props.postId,
-                //             monthAmount: quantity,
-                //             priceTotal: props.pricePerMonth * quantity,
-                //         },
-                //     ];
-                //     const params = { orderDetails };
-                //     const response = await paymentApi.postPay(params, token);
-                //     if (response.code === 200) {
-                //         if (
-                //             dispatch(
-                //                 addItem({
-                //                     id: props.postId,
-                //                     name: props.name,
-                //                     slug: props.slug,
-                //                     pricePerMonth: props.pricePerMonth,
-                //                     address: props.address,
-                //                     quantity: quantity,
-                //                 }),
-                //             )
-                //         ) {
-                //             dispatch(remove());
-                //             toast.success('Đặt thành công !', { theme: 'colored' });
-                //             let path = `/gio-hang`;
-                //             navigate(path);
-                //         }
-                //     } else {
-                //         console.log(response);
-                //         toast.error('Không thể rating 2 lần. Rating thất bại !', { theme: 'colored' });
-                //     }
-                // } catch (error) {
-                //     console.log('Thất bại khi gửi dữ liệu: ', error.message);
-                //     toast.error('Thất bại khi gửi dữ liệu', { theme: 'colored' });
-                // }
             } else {
                 toast.error('Bạn cần đăng nhập để được phép đặt phòng !', { theme: 'colored' });
             }

@@ -12,7 +12,7 @@ import postApi from '../api/postApi';
 import { useReducer } from 'react';
 
 const Homestay = () => {
-    const [motelList, setMotelList] = useState([]);
+    const [motelList, setMotelList] = useState(null);
     const [forceValue, forceUpdate] = useReducer((x) => x + 1, 0);
 
     const filterRef = useRef(null);
@@ -81,57 +81,75 @@ const Homestay = () => {
 
     useEffect(() => {}, [forceValue]);
 
+    // fix image file 404
+    if (motelList) {
+        motelList.forEach((motel) => {
+            if (motel.image.length === 0) {
+                motel.image.push({
+                    path: 'https://res.cloudinary.com/dqifjhxxg/image/upload/v1662174238/RentalApartmenntManagement/Motels/products/home-01_1_dzqwoi.jpg',
+                });
+                motel.image.push({
+                    path: 'https://res.cloudinary.com/dqifjhxxg/image/upload/v1662174239/RentalApartmenntManagement/Motels/products/home-01_2_ny6lqs.jpg',
+                });
+            }
+        });
+    }
+
     return (
         <Helmet title="Nhà trọ">
-            <div className="catalog">
-                <div className="catalog__filter" ref={filterRef}>
-                    <div className="catalog__filter__close" onClick={() => showHideFilter()}>
-                        <i className="bx bx-left-arrow-alt"></i>
-                    </div>
-                    <form onSubmit={formik.handleSubmit}>
-                        <div className="catalog__filter__widget">
-                            <div className="catalog__filter__widget__title">Tìm kiếm</div>
-                            <div className="catalog__filter__widget__content">
-                                <div className="catalog__filter__widget__title__inner">Theo địa chỉ</div>
-                                <input
-                                    id="address"
-                                    type="text"
-                                    name="address"
-                                    placeholder="Nhập địa chỉ..."
-                                    value={formik.values.address}
-                                    onChange={formik.handleChange}
-                                />
-                                <div className="catalog__filter__widget__title__inner">Theo giá cả</div>
-                                <input
-                                    id="fromPrice"
-                                    type="text"
-                                    name="FromPrice"
-                                    placeholder="Nhập giá bắt đầu..."
-                                    value={formik.values.FromPrice}
-                                    onChange={formik.handleChange}
-                                />
-                                <input
-                                    id="toPrice"
-                                    type="text"
-                                    name="ToPrice"
-                                    placeholder="Nhập giá kết thúc..."
-                                    value={formik.values.ToPrice}
-                                    onChange={formik.handleChange}
-                                />
-                                <input type="submit" className="signin-signup__btn" value="Tìm kiếm" />
-                            </div>
+            {motelList ? (
+                <div className="catalog">
+                    <div className="catalog__filter" ref={filterRef}>
+                        <div className="catalog__filter__close" onClick={() => showHideFilter()}>
+                            <i className="bx bx-left-arrow-alt"></i>
                         </div>
-                    </form>
+                        <form onSubmit={formik.handleSubmit}>
+                            <div className="catalog__filter__widget">
+                                <div className="catalog__filter__widget__title">Tìm kiếm</div>
+                                <div className="catalog__filter__widget__content">
+                                    <div className="catalog__filter__widget__title__inner">Theo địa chỉ</div>
+                                    <input
+                                        id="address"
+                                        type="text"
+                                        name="address"
+                                        placeholder="Nhập địa chỉ..."
+                                        value={formik.values.address}
+                                        onChange={formik.handleChange}
+                                    />
+                                    <div className="catalog__filter__widget__title__inner">Theo giá cả</div>
+                                    <input
+                                        id="fromPrice"
+                                        type="text"
+                                        name="FromPrice"
+                                        placeholder="Nhập giá bắt đầu..."
+                                        value={formik.values.FromPrice}
+                                        onChange={formik.handleChange}
+                                    />
+                                    <input
+                                        id="toPrice"
+                                        type="text"
+                                        name="ToPrice"
+                                        placeholder="Nhập giá kết thúc..."
+                                        value={formik.values.ToPrice}
+                                        onChange={formik.handleChange}
+                                    />
+                                    <input type="submit" className="signin-signup__btn" value="Tìm kiếm" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div className="catalog__filter__toggle">
+                        <Button size="sm" onClick={() => showHideFilter()}>
+                            Tìm kiếm
+                        </Button>
+                    </div>
+                    <div className="catalog__content">
+                        <InfinityList data={motelList} />
+                    </div>
                 </div>
-                <div className="catalog__filter__toggle">
-                    <Button size="sm" onClick={() => showHideFilter()}>
-                        Tìm kiếm
-                    </Button>
-                </div>
-                <div className="catalog__content">
-                    <InfinityList data={motelList} />
-                </div>
-            </div>
+            ) : (
+                <></>
+            )}
         </Helmet>
     );
 };
